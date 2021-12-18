@@ -1,0 +1,320 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Star System Generator</title>
+
+  <meta property="og:title" content="A Basic HTML5 Template">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.sitepoint.com/a-basic-html5-template/">
+  <meta property="og:description" content="A simple HTML5 Template for new projects.">
+  <meta property="og:image" content="image.png">
+
+  <link rel="icon" href="/favicon.ico">
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <div id="flex-content">
+  <div id="all-content">
+    <div id="sidebar">
+      <span class="title">
+        System Select
+      </span>
+      <div class="sidebar-item" id="sidebar-topper">
+        <button class="half-item" id="new-system-button">
+          New System
+        </button>
+        <button class="half-item" id="help-button">
+          HELP
+        </button>
+      </div>
+
+    </div>
+
+    <div id="right-side">
+
+      <!-- Header -->
+      <div id="header">
+        <div class="title">Current System: Example System <span id="system-name"></span></div>
+        <div id="object-select">
+          <button class="object-button selected-button top-btn" id="stars">Stars</button>
+          <button class="object-button top-btn" id="planets">Panets</button>
+          <button class="object-button top-btn" id="moons">Moons</button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div id="main-content"> 
+        <div id="stars-content" class="tab">
+          <table>
+            <tr class="bottom-border">
+              <th><label for="star-selector">Star</label></th>
+              <th class="user-data" id="star-name">
+                <select name="star-selector" class="star-selector">
+                </select>
+              </th>
+            </tr>
+            <tr>
+              <td>Mass ☉</td>
+              <td class="user-data"><input id="star-mass" type="text"></td>
+            </tr>
+            <tr>
+              <td>Mass kg</td>
+              <td class="calc-data" id="star-mass-metric">1.49x10^30</td>
+            </tr>
+            <tr>
+              <td>Luminosity ☉</td>
+              <td class="calc-data" id="star-luminosity">0.42</td>
+            </tr>
+            <tr>
+              <td>Diameter ☉</td>
+              <td class="calc-data" id="star-diamter">0.81</td>
+            </tr>
+            <tr>
+              <td>Diameter km</td>
+              <td class="calc-data" id="star-diamter-metric">1.13x10^6</td>
+            </tr>
+            <tr>
+              <td>Temperature ☉</td>
+              <td class="calc-data" id="star-temp">0.86</td>
+            </tr>
+            <tr>
+              <td>Temperature K</td>
+              <td class="calc-data" id="star-temp-metric">4996</td>
+            </tr>
+            <tr>
+              <td>Lifetime ☉</td>
+              <td class="calc-data" id="star-lifetime">2.05</td>
+            </tr>
+            <tr>
+              <td>Lifetime Yr</td>
+              <td class="calc-data" id="star-lifetime-year">1.64x10^10</td>
+            </tr>
+            <tr>
+              <td>Inner Planet Limit AU</td>
+              <td class="calc-data" id="star-planet-inner">0.08</td>
+            </tr>
+            <tr>
+              <td>Outer Planet Limit AU</td>
+              <td class="calc-data" id="star-planet-outer">30</td>
+            </tr>
+            <tr>
+              <td>Inner Habitable Zone</td>
+              <td class="calc-data" id="star-habitable-inner">0.62</td>
+            </tr>
+            <tr>
+              <td>Outer Habitable Zone</td>
+              <td class="calc-data" id="star-habitable-outer">0.89</td>
+            </tr>
+            <tr>
+              <td>Frost Line</td>
+              <td class="calc-data" id="star-frost">3.15</td>
+            </tr>
+          </table> 
+        </div>
+        <div id="planets-content" class="tab hidden">
+          <div id="object-select">
+            <button class="object-button small-button planet-btn selected-button" id="physical">Physical Characteristics</button>
+            <button class="object-button small-button planet-btn" id="orbit">Orbit</button>
+            <button class="object-button small-button planet-btn" id="time">Time</button>
+          </div>
+          <table class="bottom-border">
+            <tr>
+              <th><label for="star-selector">Star</label></th>
+              <th class="user-data star-name" id="planets-star-name">
+                <select name="star-selector" class="star-selector">
+                </select>
+              </th>
+              <th><label for="planet-selector">Planet</label></th>
+              <th class="user-data planet-name" id="planet-name-">
+                <select name="planet-selector" class="planet-selector">
+                </select>
+              </th>
+            </tr>
+          </table>
+          <div id="physical-content" class="planet-tab">
+            <table>
+              <tr>
+                <td>Mass 🜨</td>
+                <td class="user-data"> <input id="planet-mass"></td>
+              </tr>
+              <tr>
+                <td>Mass kg</td>
+                <td class="calc-data" id="planet-mass-metric"></td>
+              </tr>
+              <tr>
+                <td>Radius 🜨</td>
+                <td class="user-data"> <input id="planet-radius"></td>
+              </tr>
+              <tr>
+                <td>Radius km</td>
+                <td class="calc-data" id="planet-radius-metric"></td>
+              </tr>
+              <tr>
+                <td>Gravity 🜨</td>
+                <td class="calc-data" id="planet-gravity"></td>
+              </tr>
+              <tr>
+                <td>Gravity m/s^2</td>
+                <td class="calc-data" id="planet-gravity-metric"></td>
+              </tr>
+              <tr>
+                <td>Density 🜨</td>
+                <td class="calc-data" id="planet-density"></td>
+              </tr>
+              <tr>
+                <td>Density g/cm^3</td>
+                <td class="calc-data" id="planet-density-metric"></td>
+              </tr>
+              <tr>
+                <td>Escape Velocity 🜨</td>
+                <td class="calc-data" id="planet-velocity"></td>
+              </tr>
+              <tr>
+                <td>Escape Velocity km/s</td>
+                <td class="calc-data" id="planet-velocity-metric"></td>
+              </tr>
+              <tr>
+                <td>Circumference 🜨</td>
+                <td class="calc-data" id="planet-circumference"></td>
+              </tr>
+              <tr>
+                <td>Circumference km</td>
+                <td class="calc-data" id="planet-circumference-metric"></td>
+              </tr>
+              <tr>
+                <td>Surface Area 🜨</td>
+                <td class="calc-data" id="planet-area"></td>
+              </tr>
+              <tr>
+                <td>Surface Area km^2</td>
+                <td class="calc-data" id="planet-area-metric"></td>
+              </tr>
+              <tr>
+                <td>Volume 🜨</td>
+                <td class="calc-data" id="planet-volume"></td>
+              </tr>
+              <tr>
+                <td>Volume km^3</td>
+                <td class="calc-data" id="planet-volume-metric"></td>
+              </tr>
+              <tr>
+                <td>Average Temperature 🜨</td>
+                <td class="calc-data" id="planet-temp"></td>
+              </tr>
+              <tr>
+                <td>Average Temperature K</td>
+                <td class="calc-data" id="planet-temp-metric"></td>
+              </tr>
+            </table> 
+          </div>
+          <div id="orbit-content" class="planet-tab hidden">
+            <table>
+              <tr>
+                <td>Eccentricity</td>
+                <td class="user-data"> <input id="planet-eccentricity"></td>
+              </tr>
+              <tr>
+                <td>Semi-Major Axis AU</td>
+                <td class="calc-data"> <input id="planet-semimajor"></td>
+              </tr>
+              <tr>
+                <td>Semi-Minor Axis AU</td>
+                <td class="calc-data" id="planet-semiminor"></td>
+              </tr>
+              <tr>
+                <td>Periapsis AU</td>
+                <td class="calc-data" id="planet-periapsis"></td>
+              </tr>
+              <tr>
+                <td>Apoapsis</td>
+                <td class="calc-data" id="planet-apoapsis"></td>
+              </tr>
+              <tr>
+                <td>Orbital Period</td>
+                <td class="calc-data" id="planet-period"></td>
+              </tr>
+              <tr>
+                <td>Year (Earth Days)</td>
+                <td class="calc-data" id="planet-year-earth"></td>
+              </tr>
+              <tr>
+                <td>Orbital velocity</td>
+                <td class="calc-data" id="planet-orbital-velocity"></td>
+              </tr>
+              <tr>
+                <td>Hill Sphere inner</td>
+                <td class="calc-data" id="planet-inner-hill"></td>
+              </tr>
+              <tr>
+                <td>Hill Sphere Outer</td>
+                <td class="calc-data" id="planet-outer-hill"></td>
+              </tr>
+            </table>
+          </div>
+          <div id="time-content" class="planet-tab hidden">
+            <table>
+              <tr>
+                <td>Day Length (Hours)</td>
+                <td class="user-data"> <input id="planet-year-hours"></td>
+              </tr>
+              <tr>
+                <td>Year (Local Days)</td>
+                <td class="calc-data" id="planet-year-local"></td>
+              </tr>
+              <tr>
+                <td>Months / Year</td>
+                <td class="user-data"> <input id="planet-months-year"></td>
+              </tr>
+              <tr>
+                <td>Local Days per Month</td>
+                <td class="calc-data" id="planet-days-month"></td>
+              </tr>
+              <tr>
+                <td>Local Hour / Local Day</td>
+                <td class="user-data"> <input id="planet-hour-local"></td>
+              </tr>
+              <tr>
+                <td>Local Hrs / Earth Hr</td>
+                <td class="calc-data" id="planet-hour-earth"></td>
+              </tr>
+              <tr>
+                <td>Local Min / Local Hr</td>
+                <td class="user-data"> <input  id="planet-min-local"></td>
+              </tr>
+              <tr>
+                <td>Local Min / Earth Min</td>
+                <td class="calc-data" id="planet-min-earth"></td>
+              </tr>
+              <tr>
+                <td>Local Sec / Local Min</td>
+                <td class="user-data"> <input id="planet-sec-local"></td>
+              </tr>
+              <tr>
+                <td>Local Sec / Earth Sec</td>
+                <td class="calc-data" id="planet-sec-earth"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div id="moons-content" class="tab hidden">
+          MOONS
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+  </div>
+  </div>
+
+
+  <script src="js/scripts.js"></script>
+</body>
+</html>

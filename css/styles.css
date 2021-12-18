@@ -1,0 +1,123 @@
+html, body{
+  height: 100%;
+  padding: 0em;
+  margin: 0em;
+}
+
+#flex-content{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-content: stretch;
+  flex: 0 1 auto;
+}
+
+#all-content{
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+#sidebar{
+  padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color:rgb(69, 69, 69);
+  align-content: stretch;
+}
+
+#sidebar .title{
+  color:rgb(250, 255, 185)
+}
+
+#sidebar-topper{
+  display: flex;
+  flex-direction: row;
+  align-content: stretch;
+}
+
+.half-item{
+  padding: 0.75em;
+  width: 100%;
+}
+
+.sidebar-item{
+  padding: 0.75em;
+}
+
+#right-side{
+  flex-grow: 8;
+  background-color: rgb(155, 155, 155);
+}
+
+#object-select{
+  display: flex;
+  flex-direction: row;
+  align-content: stretch;
+  justify-content: space-around;
+}
+
+#header {
+  background-color: rgb(250, 255, 185);
+}
+
+#header .title{
+  padding: 0.5em;
+}
+
+.title{
+  font-size: 2em;
+}
+
+.object-button{
+  background-color: rgb(126, 126, 126);
+  border: none;
+  color:rgb(255, 230, 0);
+  text-decoration: none;
+  font-size: 1em;
+  width: 100%;
+  padding: 1em;
+}
+
+.object-button:hover{
+  background-color: rgb(188, 190, 142);
+}
+
+.small-button{
+  font-size: 0.75em;
+  padding: 0.75em;
+}
+
+.selected-button{
+  background-color: rgb(250, 255, 185);
+  color: black;
+  font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: white;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.25em;
+}
+
+tr:nth-child(even) {
+  background-color: #fbffce;
+}
+
+tr:hover {
+  background-color: yellow;
+}
+
+.bottom-border{
+  border-bottom: 2px solid black;
+}
+
+.hidden{
+  display: none;
+}
