@@ -18,23 +18,26 @@ html, body{
   flex-direction: row;
 }
 
-#sidebar{
+#sidebar, #systems{
   padding: 0.5em;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex-grow: .5;
   background-color:rgb(69, 69, 69);
   align-content: stretch;
 }
 
 #sidebar .title{
-  color:rgb(250, 255, 185)
+  color:rgb(250, 255, 185);
+  margin-bottom: 0.5em;
 }
 
-#sidebar-topper{
+.sidebar-topper{
+  margin: 0;
   display: flex;
   flex-direction: row;
   align-content: stretch;
+  margin-bottom: 0.25em;
 }
 
 .half-item{
@@ -47,7 +50,7 @@ html, body{
 }
 
 #right-side{
-  flex-grow: 8;
+  flex-grow: 10;
   background-color: rgb(155, 155, 155);
 }
 

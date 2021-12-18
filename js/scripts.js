@@ -243,6 +243,9 @@ const time_button = document.querySelector("#time");
 const star_selector = document.querySelectorAll(".star-selector");
 const planet_selector = document.querySelectorAll(".planet-selector");
 
+const save_button = document.querySelector("#save-button");
+const load_button = document.querySelector("#load-button");
+
 stars_button.addEventListener("click", function(){ open_tab("stars-content", "tab")} );
 planets_button.addEventListener("click", function(){ open_tab("planets-content", "tab")});
 moons_button.addEventListener("click", function(){ open_tab("moons-content", "tab")});
@@ -258,6 +261,9 @@ time_button.addEventListener("click", function(){ open_tab("time-content", "plan
 physical_button.addEventListener("click", function(){ select_button(physical_button, "planet-btn")} );
 orbit_button.addEventListener("click", function(){ select_button(orbit_button, "planet-btn")} );
 time_button.addEventListener("click", function(){ select_button(time_button, "planet-btn")} );
+
+save_button.addEventListener("click", function(){ download(JSON.stringify(system_list), "Star System Save Data.txt")} )
+load_button.addEventListener("input", function(){ upload(load_button.files[0])} )
 
 function open_tab(tab_name, tab_group) {
   var tab = document.getElementsByClassName(tab_group);
@@ -276,7 +282,10 @@ function select_button(btn, btn_group){
 }
 
 function fill_system_select(){
-  let sidebar = document.getElementById("sidebar");
+  let sidebar = document.getElementById("systems");
+  
+  sidebar.innerHTML = "";
+  
   for (let i = 0; i < system_list.length; i++){
     let el = document.createElement("button");
     el.innerHTML = system_list[i]["Name"];
@@ -479,7 +488,6 @@ function calc_time(){
 /***************
  * Saving Data *
  ***************/
-
 function save_time(star_id, planet_id){
   for(let i = 0; i < system_list[system_id]["Star Groups"].length; i++){
     for(let k = 0; k < system_list[system_id]["Star Groups"][i]["Stars"].length; k++){
@@ -504,11 +512,40 @@ function save_time(star_id, planet_id){
   }
 }
 
-calc_time()
+function download(data, filename) {
+  var file = new Blob([data], {type: 'text/plain'});
+  if (window.navigator.msSaveOrOpenBlob) // IE10+
+      window.navigator.msSaveOrOpenBlob(file, filename);
+  else { // Others
+      var a = document.createElement("a"),
+              url = URL.createObjectURL(file);
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function() {
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);  
+      }, 0); 
+  }
+}
 
 /****************
  * Loading Data *
  ****************/ 
+
+function upload(file){
+  let reader = new FileReader();
+  reader.readAsText(file);
+  reader.onload = function(e) {
+    system_list = JSON.parse(reader.result);
+    calc_time();
+    load_time();
+    fill_system_select();
+    fill_star_selector();
+    fill_planet_selector();
+  }
+}
 
 function load_time(body_type, e){
   if(body_type == STAR){
@@ -543,3 +580,4 @@ function load_time(body_type, e){
 fill_system_select();
 fill_star_selector();
 fill_planet_selector();
+calc_time()
