@@ -240,6 +240,10 @@ const physical_button = document.querySelector("#physical");
 const orbit_button = document.querySelector("#orbit");
 const time_button = document.querySelector("#time");
 
+const individual_button = document.querySelector("#individual");
+const group_button = document.querySelector("#group");
+const shared_button = document.querySelector("#shared");
+
 const star_selector = document.querySelectorAll(".star-selector");
 const planet_selector = document.querySelectorAll(".planet-selector");
 
@@ -261,6 +265,14 @@ time_button.addEventListener("click", function(){ open_tab("time-content", "plan
 physical_button.addEventListener("click", function(){ select_button(physical_button, "planet-btn")} );
 orbit_button.addEventListener("click", function(){ select_button(orbit_button, "planet-btn")} );
 time_button.addEventListener("click", function(){ select_button(time_button, "planet-btn")} );
+
+individual_button.addEventListener("click", function(){ open_tab("individual-content", "star-tab")} );
+group_button.addEventListener("click", function(){ open_tab("group-content", "star-tab")} );
+shared_button.addEventListener("click", function(){ open_tab("shared-content", "star-tab")} );
+
+individual_button.addEventListener("click", function(){ select_button(individual_button, "star-btn")} );
+group_button.addEventListener("click", function(){ select_button(group_button, "star-btn")} );
+shared_button.addEventListener("click", function(){ select_button(shared_button, "star-btn")} );
 
 save_button.addEventListener("click", function(){ download(JSON.stringify(system_list), "Star System Save Data.txt")} )
 load_button.addEventListener("input", function(){ upload(load_button.files[0])} )

@@ -19,10 +19,10 @@ html, body{
 }
 
 #sidebar, #systems{
-  padding: 0.5em;
+  padding: 0.25em;
   display: flex;
   flex-direction: column;
-  flex-grow: .5;
+  flex-grow: 0;
   background-color:rgb(69, 69, 69);
   align-content: stretch;
 }
@@ -54,7 +54,7 @@ html, body{
   background-color: rgb(155, 155, 155);
 }
 
-#object-select{
+#object-select, .sub-select{
   display: flex;
   flex-direction: row;
   align-content: stretch;

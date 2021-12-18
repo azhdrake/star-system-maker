@@ -61,74 +61,87 @@
       <!-- Main Content -->
       <div id="main-content"> 
         <div id="stars-content" class="tab">
-          <table>
-            <tr class="bottom-border">
-              <th><label for="star-selector">Star</label></th>
-              <th class="user-data" id="star-name">
-                <select name="star-selector" class="star-selector">
-                </select>
-              </th>
-            </tr>
-            <tr>
-              <td>Mass ☉</td>
-              <td class="user-data"><input id="star-mass" type="text"></td>
-            </tr>
-            <tr>
-              <td>Mass kg</td>
-              <td class="calc-data" id="star-mass-metric">1.49x10^30</td>
-            </tr>
-            <tr>
-              <td>Luminosity ☉</td>
-              <td class="calc-data" id="star-luminosity">0.42</td>
-            </tr>
-            <tr>
-              <td>Diameter ☉</td>
-              <td class="calc-data" id="star-diamter">0.81</td>
-            </tr>
-            <tr>
-              <td>Diameter km</td>
-              <td class="calc-data" id="star-diamter-metric">1.13x10^6</td>
-            </tr>
-            <tr>
-              <td>Temperature ☉</td>
-              <td class="calc-data" id="star-temp">0.86</td>
-            </tr>
-            <tr>
-              <td>Temperature K</td>
-              <td class="calc-data" id="star-temp-metric">4996</td>
-            </tr>
-            <tr>
-              <td>Lifetime ☉</td>
-              <td class="calc-data" id="star-lifetime">2.05</td>
-            </tr>
-            <tr>
-              <td>Lifetime Yr</td>
-              <td class="calc-data" id="star-lifetime-year">1.64x10^10</td>
-            </tr>
-            <tr>
-              <td>Inner Planet Limit AU</td>
-              <td class="calc-data" id="star-planet-inner">0.08</td>
-            </tr>
-            <tr>
-              <td>Outer Planet Limit AU</td>
-              <td class="calc-data" id="star-planet-outer">30</td>
-            </tr>
-            <tr>
-              <td>Inner Habitable Zone</td>
-              <td class="calc-data" id="star-habitable-inner">0.62</td>
-            </tr>
-            <tr>
-              <td>Outer Habitable Zone</td>
-              <td class="calc-data" id="star-habitable-outer">0.89</td>
-            </tr>
-            <tr>
-              <td>Frost Line</td>
-              <td class="calc-data" id="star-frost">3.15</td>
-            </tr>
-          </table> 
+          <div id="star-stat-type-select" class="sub-select">
+            <button class="object-button small-button star-btn selected-button" id="individual">Individual Stats</button>
+            <button class="object-button small-button star-btn" id="group">Group Stats</button>
+            <button class="object-button small-button star-btn" id="shared">Shared Stats</button>
+          </div>
+          <div id="individual-content" class="star-tab">
+            <table>
+              <tr class="bottom-border">
+                <th><label for="star-selector">Star</label></th>
+                <th class="user-data" id="star-name">
+                  <select name="star-selector" class="star-selector">
+                  </select>
+                </th>
+              </tr>
+              <tr>
+                <td>Mass ☉</td>
+                <td class="user-data"><input id="star-mass" type="text"></td>
+              </tr>
+              <tr>
+                <td>Mass kg</td>
+                <td class="calc-data" id="star-mass-metric">1.49x10^30</td>
+              </tr>
+              <tr>
+                <td>Luminosity ☉</td>
+                <td class="calc-data" id="star-luminosity">0.42</td>
+              </tr>
+              <tr>
+                <td>Diameter ☉</td>
+                <td class="calc-data" id="star-diamter">0.81</td>
+              </tr>
+              <tr>
+                <td>Diameter km</td>
+                <td class="calc-data" id="star-diamter-metric">1.13x10^6</td>
+              </tr>
+              <tr>
+                <td>Temperature ☉</td>
+                <td class="calc-data" id="star-temp">0.86</td>
+              </tr>
+              <tr>
+                <td>Temperature K</td>
+                <td class="calc-data" id="star-temp-metric">4996</td>
+              </tr>
+              <tr>
+                <td>Lifetime ☉</td>
+                <td class="calc-data" id="star-lifetime">2.05</td>
+              </tr>
+              <tr>
+                <td>Lifetime Yr</td>
+                <td class="calc-data" id="star-lifetime-year">1.64x10^10</td>
+              </tr>
+              <tr>
+                <td>Inner Planet Limit AU</td>
+                <td class="calc-data" id="star-planet-inner">0.08</td>
+              </tr>
+              <tr>
+                <td>Outer Planet Limit AU</td>
+                <td class="calc-data" id="star-planet-outer">30</td>
+              </tr>
+              <tr>
+                <td>Inner Habitable Zone</td>
+                <td class="calc-data" id="star-habitable-inner">0.62</td>
+              </tr>
+              <tr>
+                <td>Outer Habitable Zone</td>
+                <td class="calc-data" id="star-habitable-outer">0.89</td>
+              </tr>
+              <tr>
+                <td>Frost Line</td>
+                <td class="calc-data" id="star-frost">3.15</td>
+              </tr>
+            </table> 
+          </div>
+          <div id="group-content" class="star-tab hidden">
+            GROUP
+          </div>
+          <div id="shared-content" class="star-tab hidden">
+            SHARED
+          </div>
         </div>
         <div id="planets-content" class="tab hidden">
-          <div id="object-select">
+          <div id="object-select" class="sub-select">
             <button class="object-button small-button planet-btn selected-button" id="physical">Physical Characteristics</button>
             <button class="object-button small-button planet-btn" id="orbit">Orbit</button>
             <button class="object-button small-button planet-btn" id="time">Time</button>
