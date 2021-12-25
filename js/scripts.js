@@ -238,26 +238,12 @@ const planet_min_earth_field = document.querySelector("#planet-min-earth");
 const planet_sec_local_field = document.querySelector("#planet-sec-local");
 const planet_sec_earth_field = document.querySelector("#planet-sec-earth");
 
-star_mass_field.addEventListener('input', calc_time);
 star_mass_field.addEventListener('input', function(){ save_time()} );
 
-star_a_eccentrisity_field.addEventListener('input', calc_time);
-star_b_eccentrisity_field.addEventListener('input', calc_time);
 star_a_eccentrisity_field.addEventListener('input', function(){ save_time(0)} );
 star_b_eccentrisity_field.addEventListener('input', function(){ save_time(1)} );
 
-shared_separation_avg_field.addEventListener('input', calc_time);
 shared_separation_avg_field.addEventListener('input', function(){ save_time()} );
-
-planet_eccentricity_field.addEventListener('input', calc_time);
-planet_semimajor_field.addEventListener('input', calc_time);
-planet_mass_field.addEventListener('input', calc_time);
-planet_radius_field.addEventListener('input', calc_time);
-planet_day_hours_field.addEventListener('input', calc_time);
-planet_months_year_field.addEventListener('input', calc_time);
-planet_hour_local_field.addEventListener('input', calc_time);
-planet_min_local_field.addEventListener('input', calc_time);
-planet_sec_local_field.addEventListener('input', calc_time);
 
 planet_eccentricity_field.addEventListener('input', function(){ save_time()} );
 planet_semimajor_field.addEventListener('input', function(){ save_time()} );
@@ -288,11 +274,11 @@ function calc_time(){
   star_a_mass = star_b_mass = star_a_eccentrisity = star_b_eccentrisity = shared_separation_avg = star_a_lum = star_b_lum = 0;
 
   if(group_id == 0 || group_id == 1){
-    star_a_mass = system_list[system_id]["Star Groups"][group_id]["Stars"][0]["Mass"];
-    star_b_mass = system_list[system_id]["Star Groups"][group_id]["Stars"][1]["Mass"];
-    star_a_eccentrisity = system_list[system_id]["Star Groups"][group_id]["Stars"][0]["Eccentrisity"];
-    star_b_eccentrisity = system_list[system_id]["Star Groups"][group_id]["Stars"][1]["Eccentrisity"];
-    shared_separation_avg = system_list[system_id]["Star Groups"][group_id]["Average Separation"];
+    star_a_mass = Number(system_list[system_id]["Star Groups"][group_id]["Stars"][0]["Mass"]);
+    star_b_mass = Number(system_list[system_id]["Star Groups"][group_id]["Stars"][1]["Mass"]);
+    star_a_eccentrisity = Number(system_list[system_id]["Star Groups"][group_id]["Stars"][0]["Eccentrisity"]);
+    star_b_eccentrisity = Number(system_list[system_id]["Star Groups"][group_id]["Stars"][1]["Eccentrisity"]);
+    shared_separation_avg = Number(system_list[system_id]["Star Groups"][group_id]["Average Separation"]);
   } else {
     for(let star in system_list[system_id]["Star Groups"][0]["Stars"]){
       star_a_mass += star["Mass"];
@@ -307,14 +293,17 @@ function calc_time(){
     shared_separation_avg = system_list[system_id]["Average Separation"];
   }
 
-  barycenter_a = star_a_barycenter_field.innerHTML = shared_separation_avg * (star_b_mass/(star_a_mass+star_b_mass));
-  barycenter_b = star_b_barycenter_field.innerHTML = barycenter_a - shared_separation_avg;
+  barycenter_a = star_a_barycenter_field.innerHTML = shared_separation_avg* (star_b_mass / (Number(star_a_mass) + Number(star_b_mass)));
+  barycenter_b = star_b_barycenter_field.innerHTML = shared_separation_avg - barycenter_a;
   bary_max_a = star_a_barycenter_max_field.innerHTML = (1 + star_a_eccentrisity) * barycenter_a;
   bary_max_b = star_b_barycenter_max_field.innerHTML = (1 + star_b_eccentrisity) * barycenter_b;
   bary_min_a = star_a_barycenter_min_field.innerHTML = (1 - star_a_eccentrisity) * barycenter_a;
   bary_min_b = star_b_barycenter_min_field.innerHTML = (1 - star_b_eccentrisity) * barycenter_b;
   star_a_semimajor = star_a_semimajor_field.innerHTML = (bary_max_a + bary_min_a) / 2;
   star_b_semimajor = star_b_semimajor_field.innerHTML = (bary_max_b + bary_min_b) / 2;
+
+console.log("bca: " + typeof(barycenter_a) + "; shared sep: " + typeof(shared_separation_avg) + "; star a mass: " + typeof(star_a_mass) + "; star b mass: " + typeof(star_b_mass))
+console.log(shared_separation_avg * (star_b_mass / (Number(star_a_mass) + Number(star_b_mass))))
 
   shared_min_sep = shared_separation_min_field.innerHTML = bary_min_a + bary_min_b;
   shared_max_sep = shared_separation_max_field.innerHTML = bary_max_a + bary_max_b;
@@ -386,13 +375,13 @@ function save_time(sub_group){
   } else {
     for(let i = 0; i < system_list[system_id]["Star Groups"].length; i++){
       if(system_list[system_id]["Star Groups"][i]["ID"] == group_id){
-        system_list[system_id]["Star Groups"][i]["Average Separation"] = shared_separation_avg;
+        system_list[system_id]["Star Groups"][i]["Average Separation"] = shared_separation_avg_field.value;
         for(let k = 0; k < system_list[system_id]["Star Groups"][i]["Stars"].length; k++){
           if(system_list[system_id]["Star Groups"][i]["Stars"][k]["ID"] == 0){
-            system_list[system_id]["Star Groups"][i]["Stars"][k]["Eccentrisity"] = star_a_eccentrisity;
+            system_list[system_id]["Star Groups"][i]["Stars"][k]["Eccentrisity"] = star_a_eccentrisity_field.value;
           }
           else if(system_list[system_id]["Star Groups"][i]["Stars"][k]["ID"] == 1){
-            system_list[system_id]["Star Groups"][i]["Stars"][k]["Eccentrisity"] = star_b_eccentrisity;
+            system_list[system_id]["Star Groups"][i]["Stars"][k]["Eccentrisity"] = star_b_eccentrisity_field.value;
           }
           if(system_list[system_id]["Star Groups"][i]["Stars"][k]["ID"] == star_id){
             system_list[system_id]["Star Groups"][i]["Stars"][k]["Mass"] = star_mass;
@@ -415,6 +404,7 @@ function save_time(sub_group){
       }
     }
   }
+  calc_time();
 }
 
 function download(data, filename) {
