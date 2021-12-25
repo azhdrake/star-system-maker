@@ -2,229 +2,10 @@
  * Data Storage *
  ****************/
 
- let system_list = [
-  {
-   "ID": 0,
-   "Name": "System 1",
-   "Star Groups": [{
-       "Stars" : [{
-         "ID": 0,
-         "Name": "Test Star 1",
-         "Mass": 1 
-       }], 
-       "Planets": [{
-         "ID": 0,
-         "Name": "Test Star 1 Alpha",
-         "Mass": 1,
-         "Radius": 1,
-         "Eccentricity": 0.25,
-         "Semi-Major Axis": 1,
-         "Axial Tilt": 30,
-         "Day Length": 24,
-         "Months/Year": 12,
-         "Hour/Day": 24,
-         "Min/Hr": 60,
-         "Sec/Min": 60
-       },{
-         "ID": 1,
-         "Name": "Test Star 1 Beta",
-         "Mass": 2,
-         "Radius": 1.25,
-         "Eccentricity": 0.2,
-         "Semi-Major Axis": 2,
-         "Axial Tilt": 60,
-         "Day Length": 24,
-         "Months/Year": 12,
-         "Hour/Day": 24,
-         "Min/Hr": 60,
-         "Sec/Min": 60
-       }]
-     },{
-       "Stars" : [{
-         "ID": 1,
-         "Name": "Test Star 2",
-         "Mass": 2
-       }],
-       "Planets": [{
-           "ID": 0,
-           "Name": "Test Star 2 Alpha",
-           "Mass": 0.8,
-           "Radius": 1.2,
-           "Eccentricity": 0.3,
-           "Semi-Major Axis": 1.1,
-           "Axial Tilt": 30,
-           "Day Length": 24,
-           "Months/Year": 12,
-           "Hour/Day": 24,
-           "Min/Hr": 60,
-           "Sec/Min": 60
-         },{
-           "ID": 1,
-           "Name": "Test Star 2 Beta",
-           "Mass": 0.9,
-           "Radius": 0.9,
-           "Eccentricity": 0.4,
-           "Semi-Major Axis": .75,
-           "Axial Tilt": 25,
-           "Day Length":20,
-           "Months/Year": 6,
-           "Hour/Day": 10,
-           "Min/Hr": 50,
-           "Sec/Min": 50
-         },{
-           "ID": 2,
-           "Name": "Test Star 2 Gamma",
-           "Mass": 1.2,
-           "Radius": 1.4,
-           "Eccentricity": 0.1,
-           "Semi-Major Axis": 1.3,
-           "Axial Tilt": 20,
-           "Day Length": 24.13,
-           "Months/Year": 8,
-           "Hour/Day": 15,
-           "Min/Hr": 100,
-           "Sec/Min": 100
-         }]
-     }],
-   "Group Stats":[{
-     "Group Name": "A+B",
-     "In Use": false,
-     "Eccentrisity": 0
-   },{
-     "Group Name": "C+D",
-     "In Use": false,
-     "Eccentrisity": 0,
-   },{
-     "Group Name": "AB+CD",
-     "In Use": false,
-     "Eccentrisity": 0,
-   }],
-   "Shared Stats": [
-     {
-       "Group Name": "A+B",
-       "In Use": false,
-       "Average Separation": 0
-     },{
-       "Group Name": "C+D",
-       "In Use": false,
-       "Average Separation": 0
-     },{
-       "Group Name": "AB+CD",
-       "In Use": false,
-       "Average Separation": 0
-     }
-   ]
- },{
-   "ID": 1,
-   "Name": "System 2",
-   "Star Groups": [{
-       "Stars" : [{
-         "ID": 0,
-         "Name": "Test Star 3",
-         "Mass": 3 
-       },{
-         "ID": 1,
-         "Name": "Test Star 4",
-         "Mass": 4
-       }], 
-       "Planets": [{
-         "ID": 0,
-         "Name": "Test Star 3-4 Alpha",
-         "Mass": 2,
-         "Radius": .9,
-         "Eccentricity": 0.25,
-         "Semi-Major Axis": 2,
-         "Axial Tilt": 40,
-         "Day Length": 24,
-         "Months/Year": 12,
-         "Hour/Day": 24,
-         "Min/Hr": 60,
-         "Sec/Min": 60
-       }]
-     },{
-       "Stars" : [{
-         "ID": 2,
-         "Name": "Test Star 5",
-         "Mass": 5
-       },{
-         "ID": 3,
-         "Name": "Test Star 6",
-         "Mass": 6
-       }],
-       "Planets": [{
-           "ID": 0,
-           "Name": "Test Star 5-6 Alpha",
-           "Mass": 1.2,
-           "Radius": 1.5,
-           "Eccentricity": 0.03,
-           "Semi-Major Axis": 1.15,
-           "Axial Tilt": 35,
-           "Day Length": 24,
-           "Months/Year": 12,
-           "Hour/Day": 24,
-           "Min/Hr": 60,
-           "Sec/Min": 60
-         },{
-           "ID": 1,
-           "Name": "Test Star 5-6 Beta",
-           "Mass": 0.75,
-           "Radius": 0.75,
-           "Eccentricity": 0.075,
-           "Semi-Major Axis": 1.75,
-           "Axial Tilt": 75,
-           "Day Length":20,
-           "Months/Year": 6,
-           "Hour/Day": 10,
-           "Min/Hr": 50,
-           "Sec/Min": 50
-         }]
-     }],
-   "Group Stats":[{
-     "Group Name": "A+B",
-     "In Use": true,
-     "Stats": [{
-       "Eccentrisity": 0.5,
-     },{
-       "Eccentrisity": 0.05,
-     }]
-   },{
-     "Group Name": "C+D",
-     "In Use": true,
-     "Stats": [{
-       "Eccentrisity": 0.1,
-     },{
-       "Eccentrisity": 0.25,
-     }]
-   },{
-     "Group Name": "AB+CD",
-     "In Use": true,
-     "Stats": [{
-       "Eccentrisity": 0.2,
-     },{
-       "Eccentrisity": 0.4,
-     }]
-   }],
-   "Shared Stats": [
-     {
-       "Group Name": "A+B",
-       "In Use": true,
-       "Average Separation": 0.2
-     },{
-       "Group Name": "C+D",
-       "In Use": true,
-       "Average Separation": 0.3
-     },{
-       "Group Name": "AB+CD",
-       "In Use": true,
-       "Average Separation": 413
-     }
-   ]
- },
-];
-
 const STAR = 0;
 const PLANET = 1;
 const MOON = 2;
+const GROUP = 3;
 
 let system_id = group_id = star_id = planet_id = 0;
 
@@ -246,6 +27,7 @@ const shared_button = document.querySelector("#shared");
 
 const star_selector = document.querySelectorAll(".star-selector");
 const planet_selector = document.querySelectorAll(".planet-selector");
+const group_selector = document.querySelectorAll(".group-selector");
 
 const save_button = document.querySelector("#save-button");
 const load_button = document.querySelector("#load-button");
@@ -308,6 +90,23 @@ function fill_system_select(){
   }
 }
 
+function fill_group_selector(){
+  for(let l = 0; l < group_selector.length; l++){
+    group_selector[l].innerHTML = "";
+  }
+  for(let i = 0; i < group_selector.length; i++){
+    group_selector[i].addEventListener("change", function(){load_time(GROUP, this.value)} );
+    group_selector[i].addEventListener("change", fill_planet_selector);
+
+    for(let j = 0; j < system_list[system_id]["Star Groups"].length; j++) {
+      let el = document.createElement("option");
+      el.textContent = system_list[system_id]["Star Groups"][j]["Stars"][0]["Name"] + " & " + system_list[system_id]["Star Groups"][j]["Stars"][1]["Name"];
+      el.value = system_list[system_id]["Star Groups"][j]["ID"];
+      group_selector[i].appendChild(el);
+    }
+  }
+}
+
 function fill_star_selector(){
   for(let l = 0; l < star_selector.length; l++){
     star_selector[l].innerHTML = "";
@@ -354,6 +153,7 @@ function system_select(selected_system_id){
   system_id = selected_system_id;
   fill_star_selector();
   fill_planet_selector();
+  fill_group_selector();
 }
 
 /***************
@@ -373,6 +173,29 @@ const star_planet_outer_field = document.querySelector("#star-planet-outer");
 const star_habitable_inner_field = document.querySelector("#star-habitable-inner");
 const star_habitable_outer_field = document.querySelector("#star-habitable-outer");
 const star_frost_field = document.querySelector("#star-frost");
+
+const star_a_eccentrisity_field = document.querySelector("#star-a-eccentrisity");
+const star_b_eccentrisity_field = document.querySelector("#star-b-eccentrisity");
+const star_a_semimajor_field = document.querySelector("#star-a-semimajor");
+const star_b_semimajor_field = document.querySelector("#star-b-semimajor");
+const star_a_barycenter_field = document.querySelector("#star-a-barycenter");
+const star_b_barycenter_field = document.querySelector("#star-b-barycenter");
+const star_a_barycenter_max_field = document.querySelector("#star-a-barycenter-max");
+const star_b_barycenter_max_field = document.querySelector("#star-b-barycenter-max");
+const star_a_barycenter_min_field = document.querySelector("#star-a-barycenter-min");
+const star_b_barycenter_min_field = document.querySelector("#star-b-barycenter-min");
+
+const shared_separation_avg_field = document.querySelector("#shared-separation-avg");
+const shared_separation_min_field = document.querySelector("#shared-separation-min");
+const shared_separation_max_field = document.querySelector("#shared-separation-max");
+const shared_period_field = document.querySelector("#shared-orbital-period");
+const shared_planet_inner_field = document.querySelector("#shared-planet-inner");
+const shared_planet_outer_field = document.querySelector("#shared-planet-outer");
+const shared_habitable_inner_field = document.querySelector("#shared-habitable-inner");
+const shared_habitable_outer_field = document.querySelector("#shared-habitable-outer");
+const shared_frost_field = document.querySelector("#shared-frost-line");
+const shared_death_inner_field = document.querySelector("#shared-death-inner");
+const shared_death_outer_field = document.querySelector("#shared-death-outer");
 
 const planet_mass_field = document.querySelector("#planet-mass");
 const planet_mass_metric_field = document.querySelector("#planet-mass-metric");
@@ -416,7 +239,15 @@ const planet_sec_local_field = document.querySelector("#planet-sec-local");
 const planet_sec_earth_field = document.querySelector("#planet-sec-earth");
 
 star_mass_field.addEventListener('input', calc_time);
-star_mass_field.addEventListener('input', function(){ save_time(star_id, planet_id)} );
+star_mass_field.addEventListener('input', function(){ save_time()} );
+
+star_a_eccentrisity_field.addEventListener('input', calc_time);
+star_b_eccentrisity_field.addEventListener('input', calc_time);
+star_a_eccentrisity_field.addEventListener('input', function(){ save_time(0)} );
+star_b_eccentrisity_field.addEventListener('input', function(){ save_time(1)} );
+
+shared_separation_avg_field.addEventListener('input', calc_time);
+shared_separation_avg_field.addEventListener('input', function(){ save_time()} );
 
 planet_eccentricity_field.addEventListener('input', calc_time);
 planet_semimajor_field.addEventListener('input', calc_time);
@@ -428,15 +259,15 @@ planet_hour_local_field.addEventListener('input', calc_time);
 planet_min_local_field.addEventListener('input', calc_time);
 planet_sec_local_field.addEventListener('input', calc_time);
 
-planet_eccentricity_field.addEventListener('input', function(){ save_time(star_id, planet_id)} );
-planet_semimajor_field.addEventListener('input', function(){ save_time(star_id, planet_id)} );
-planet_mass_field.addEventListener('input', function(){ save_time(star_id, planet_id)} );
-planet_radius_field.addEventListener('input', function(){ save_time(star_id, planet_id)} );
-planet_day_hours_field.addEventListener('input', function(){ save_time(star_id, planet_id)} );
-planet_months_year_field.addEventListener('input', function(){ save_time(star_id, planet_id)} );
-planet_hour_local_field.addEventListener('input', function(){ save_time(star_id, planet_id)} );
-planet_min_local_field.addEventListener('input', function(){ save_time(star_id, planet_id)} );
-planet_sec_local_field.addEventListener('input', function(){ save_time(star_id, planet_id)} );
+planet_eccentricity_field.addEventListener('input', function(){ save_time()} );
+planet_semimajor_field.addEventListener('input', function(){ save_time()} );
+planet_mass_field.addEventListener('input', function(){ save_time()} );
+planet_radius_field.addEventListener('input', function(){ save_time()} );
+planet_day_hours_field.addEventListener('input', function(){ save_time()} );
+planet_months_year_field.addEventListener('input', function(){ save_time()} );
+planet_hour_local_field.addEventListener('input', function(){ save_time()} );
+planet_min_local_field.addEventListener('input', function(){ save_time()} );
+planet_sec_local_field.addEventListener('input', function(){ save_time()} );
 
 function calc_time(){
   star_mass = star_mass_field.value;
@@ -453,6 +284,53 @@ function calc_time(){
   star_habitable_inner_field.innerHTML = Math.sqrt(star_mass)*0.95;
   star_habitable_outer_field.innerHTML = Math.sqrt(star_mass)*1.37;
   star_frost_field.innerHTML = Math.sqrt(star_mass)*4.85;
+  
+  star_a_mass = star_b_mass = star_a_eccentrisity = star_b_eccentrisity = shared_separation_avg = star_a_lum = star_b_lum = 0;
+
+  if(group_id == 0 || group_id == 1){
+    star_a_mass = system_list[system_id]["Star Groups"][group_id]["Stars"][0]["Mass"];
+    star_b_mass = system_list[system_id]["Star Groups"][group_id]["Stars"][1]["Mass"];
+    star_a_eccentrisity = system_list[system_id]["Star Groups"][group_id]["Stars"][0]["Eccentrisity"];
+    star_b_eccentrisity = system_list[system_id]["Star Groups"][group_id]["Stars"][1]["Eccentrisity"];
+    shared_separation_avg = system_list[system_id]["Star Groups"][group_id]["Average Separation"];
+  } else {
+    for(let star in system_list[system_id]["Star Groups"][0]["Stars"]){
+      star_a_mass += star["Mass"];
+      star_a_lum =  Math.pow(star_a_mass, 3);
+    }
+    for(let star in system_list[system_id]["Star Groups"][1]["Stars"]){
+      star_b_mass += star["Mass"];
+      star_b_lum =  Math.pow(star_b_mass, 3);
+    }
+    star_a_eccentrisity = system_list[system_id]["Star Groups"][0]["Eccentrisity"]
+    star_b_eccentrisity = system_list[system_id]["Star Groups"][1]["Eccentrisity"]
+    shared_separation_avg = system_list[system_id]["Average Separation"];
+  }
+
+  barycenter_a = star_a_barycenter_field.innerHTML = shared_separation_avg * (star_b_mass/(star_a_mass+star_b_mass));
+  barycenter_b = star_b_barycenter_field.innerHTML = barycenter_a - shared_separation_avg;
+  bary_max_a = star_a_barycenter_max_field.innerHTML = (1 + star_a_eccentrisity) * barycenter_a;
+  bary_max_b = star_b_barycenter_max_field.innerHTML = (1 + star_b_eccentrisity) * barycenter_b;
+  bary_min_a = star_a_barycenter_min_field.innerHTML = (1 - star_a_eccentrisity) * barycenter_a;
+  bary_min_b = star_b_barycenter_min_field.innerHTML = (1 - star_b_eccentrisity) * barycenter_b;
+  star_a_semimajor = star_a_semimajor_field.innerHTML = (bary_max_a + bary_min_a) / 2;
+  star_b_semimajor = star_b_semimajor_field.innerHTML = (bary_max_b + bary_min_b) / 2;
+
+  shared_min_sep = shared_separation_min_field.innerHTML = bary_min_a + bary_min_b;
+  shared_max_sep = shared_separation_max_field.innerHTML = bary_max_a + bary_max_b;
+  shared_period_field.innerHTML = ((2*Math.PI)*Math.sqrt((((star_a_semimajor+star_b_semimajor)*149600000000)^3)/(6.674E-11*(star_a_mass+star_b_mass))))/31540000;
+
+  if(group_id == 0 || group_id == 1){
+  shared_planet_inner_field.innerHTML = (star_a_mass+star_b_mass) * 0.1;
+  shared_planet_outer_field.innerHTML = (star_a_mass+star_b_mass) * 40;
+  shared_habitable_inner_field.innerHTML = Math.sqrt(star_a_lum + star_b_lum) * 0.95;
+  shared_habitable_outer_field.innerHTML =  Math.sqrt(star_a_lum + star_b_lum) * 1.37;
+  shared_frost_field.innerHTML =  Math.sqrt(star_a_lum + star_b_lum) * 4.85;
+  shared_death_inner_field.innerHTML = shared_min_sep / 3;
+  shared_death_outer_field.innerHTML = shared_max_sep * 3
+  } else {
+    shared_planet_inner_field.innerHTML = shared_planet_outer_field.innerHTML = shared_habitable_inner_field.innerHTML = shared_habitable_outer_field.innerHTML = shared_frost_field.innerHTML = shared_death_inner_field.innerHTML = shared_death_outer_field.innerHTML = "N/A"
+  }
 
   planet_eccentricity = planet_eccentricity_field.value;
   planet_semimajor = planet_semimajor_field.value;
@@ -500,23 +378,38 @@ function calc_time(){
 /***************
  * Saving Data *
  ***************/
-function save_time(star_id, planet_id){
-  for(let i = 0; i < system_list[system_id]["Star Groups"].length; i++){
-    for(let k = 0; k < system_list[system_id]["Star Groups"][i]["Stars"].length; k++){
-      if(system_list[system_id]["Star Groups"][i]["Stars"][k]["ID"] == star_id){
-        system_list[system_id]["Star Groups"][i]["Stars"][k]["Mass"] = star_mass;
-        for(let j = 0; j < system_list[system_id]["Star Groups"][i]["Planets"].length; j++){
-          if(system_list[system_id]["Star Groups"][i]["Planets"][j]["ID"] == planet_id){
-            system_list[system_id]["Star Groups"][i]["Planets"][j]["Mass"] = planet_mass;
-            system_list[system_id]["Star Groups"][i]["Planets"][j]["Radius"] = planet_rad;
-            system_list[system_id]["Star Groups"][i]["Planets"][j]["Eccentricity"] = planet_eccentricity;
-            system_list[system_id]["Star Groups"][i]["Planets"][j]["Semi-Major Axis"] = planet_semimajor;
-            system_list[system_id]["Star Groups"][i]["Planets"][j]["Axial Tilt"] = "";
-            system_list[system_id]["Star Groups"][i]["Planets"][j]["Day Length"] = planet_day_hours;
-            system_list[system_id]["Star Groups"][i]["Planets"][j]["Months/Year"] = planet_months_year;
-            system_list[system_id]["Star Groups"][i]["Planets"][j]["Hour/Day"] = planet_hour_local;
-            system_list[system_id]["Star Groups"][i]["Planets"][j]["Min/Hr"] = planet_min_local;
-            system_list[system_id]["Star Groups"][i]["Planets"][j]["Sec/Min"] = planet_sec_local;
+function save_time(sub_group){
+  if(group_id == 2){
+    system_list[system_id]["Average Separation"] = shared_separation_avg;
+    system_list[system_id]["Star Groups"][0]["Eccentrisity"] = star_a_eccentrisity;
+    system_list[system_id]["Star Groups"][1]["Eccentrisity"] = star_b_eccentrisity;
+  } else {
+    for(let i = 0; i < system_list[system_id]["Star Groups"].length; i++){
+      if(system_list[system_id]["Star Groups"][i]["ID"] == group_id){
+        system_list[system_id]["Star Groups"][i]["Average Separation"] = shared_separation_avg;
+        for(let k = 0; k < system_list[system_id]["Star Groups"][i]["Stars"].length; k++){
+          if(system_list[system_id]["Star Groups"][i]["Stars"][k]["ID"] == 0){
+            system_list[system_id]["Star Groups"][i]["Stars"][k]["Eccentrisity"] = star_a_eccentrisity;
+          }
+          else if(system_list[system_id]["Star Groups"][i]["Stars"][k]["ID"] == 1){
+            system_list[system_id]["Star Groups"][i]["Stars"][k]["Eccentrisity"] = star_b_eccentrisity;
+          }
+          if(system_list[system_id]["Star Groups"][i]["Stars"][k]["ID"] == star_id){
+            system_list[system_id]["Star Groups"][i]["Stars"][k]["Mass"] = star_mass;
+            for(let j = 0; j < system_list[system_id]["Star Groups"][i]["Planets"].length; j++){
+              if(system_list[system_id]["Star Groups"][i]["Planets"][j]["ID"] == planet_id){
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Mass"] = planet_mass;
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Radius"] = planet_rad;
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Eccentricity"] = planet_eccentricity;
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Semi-Major Axis"] = planet_semimajor;
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Axial Tilt"] = "";
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Day Length"] = planet_day_hours;
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Months/Year"] = planet_months_year;
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Hour/Day"] = planet_hour_local;
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Min/Hr"] = planet_min_local;
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Sec/Min"] = planet_sec_local;
+              }
+            }
           }
         }
       }
@@ -556,6 +449,7 @@ function upload(file){
     fill_system_select();
     fill_star_selector();
     fill_planet_selector();
+    fill_group_selector();
   }
 }
 
@@ -564,32 +458,46 @@ function load_time(body_type, e){
     star_id = e;
   } else if(body_type == PLANET){
     planet_id = e;
+  } else if(body_type == GROUP){
+    group_id = e;
   }
   
-  for(let i = 0; i < system_list[system_id]["Star Groups"].length; i++){
-    for(let k = 0; k < system_list[system_id]["Star Groups"][i]["Stars"].length; k++){
-      if(system_list[system_id]["Star Groups"][i]["Stars"][k]["ID"] == star_id){
-        star_mass_field.value = system_list[system_id]["Star Groups"][i]["Stars"][k]["Mass"];
-        for(let j =0; j < system_list[system_id]["Star Groups"][i]["Planets"].length; j++){
-          if(system_list[system_id]["Star Groups"][i]["Planets"][j]["ID"] == planet_id){
-            planet_mass_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Mass"];
-            planet_radius_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Radius"];
-            planet_eccentricity_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Eccentricity"];
-            planet_semimajor_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Semi-Major Axis"];
-            planet_day_hours_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Day Length"];
-            planet_months_year_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Months/Year"]; 
-            planet_hour_local_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Hour/Day"];
-            planet_min_local_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Min/Hr"];
-            planet_sec_local_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Sec/Min"];
+  if(group_id == 2){
+    star_a_eccentrisity_field.value = system_list[system_id]["Star Groups"][0]["Eccentrisity"];
+    star_b_eccentrisity_field.value = system_list[system_id]["Star Groups"][1]["Eccentrisity"];
+    shared_separation_avg_field.value = system_list[system_id]["Average Separation"];
+  } else {
+    for (let i = 0; i < system_list[system_id]["Star Groups"].length; i++){
+      if(system_list[system_id]["Star Groups"][i]["ID"] == group_id){
+        shared_separation_avg_field.value = system_list[system_id]["Star Groups"][i]["Average Separation"];
+        star_a_eccentrisity_field.value = system_list[system_id]["Star Groups"][i]["Stars"][0]["Eccentrisity"];
+        star_b_eccentrisity_field.value = system_list[system_id]["Star Groups"][i]["Stars"][1]["Eccentrisity"];
+        for(let k = 0; k < system_list[system_id]["Star Groups"][i]["Stars"].length; k++){
+          if(system_list[system_id]["Star Groups"][i]["Stars"][k]["ID"] == star_id){
+            star_mass_field.value = system_list[system_id]["Star Groups"][i]["Stars"][k]["Mass"];
+            for(let j =0; j < system_list[system_id]["Star Groups"][i]["Planets"].length; j++){
+              if(system_list[system_id]["Star Groups"][i]["Planets"][j]["ID"] == planet_id){
+                planet_mass_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Mass"];
+                planet_radius_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Radius"];
+                planet_eccentricity_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Eccentricity"];
+                planet_semimajor_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Semi-Major Axis"];
+                planet_day_hours_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Day Length"];
+                planet_months_year_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Months/Year"]; 
+                planet_hour_local_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Hour/Day"];
+                planet_min_local_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Min/Hr"];
+                planet_sec_local_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Sec/Min"];
+              }
+            }
           }
         }
       }
-      calc_time();
     }
   }
+  calc_time();
  }
 
 fill_system_select();
 fill_star_selector();
 fill_planet_selector();
+fill_group_selector();
 calc_time()

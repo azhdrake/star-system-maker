@@ -134,10 +134,101 @@
             </table> 
           </div>
           <div id="group-content" class="star-tab hidden">
-            GROUP
+            <table>
+              <tr>
+                <th><label for="group-selector">Star Group</label></th>
+                <th class="user-data group-name" id="star-group-name">
+                <select name="group-selector" class="group-selector">
+                </select>
+              </th>
+              </tr>
+              <tr>
+                <th>Star</th>
+                <th id="group-star-a">Star A</th>
+                <th id="group-star-b">Star B</th>
+              </tr>
+              <tr>
+                <td>Eccentrisity</td>
+                <td class="user-data star-a"> <input id="star-a-eccentrisity"></td>
+                <td class="user-data star-b"> <input id="star-b-eccentrisity"></td>
+              </tr>
+              <tr>
+                <td>Semi-Major Axis AU</td>
+                <td class="calc-data star-a" id="star-a-semimajor"></td>
+                <td class="calc-data star-b" id="star-b-semimajor"></td>
+              </tr>
+              <tr>
+                <td>Average Barycenter AU</td>
+                <td class="calc-data star-a" id="star-a-barycenter"></td>
+                <td class="calc-data star-b" id="star-b-barycenter"></td>
+              </tr>
+              <tr>
+                <td>Max from Barycenter AU</td>
+                <td class="calc-data star-a" id="star-a-barycenter-max"></td>
+                <td class="calc-data star-b" id="star-b-barycenter-max"></td>
+              </tr>
+              <tr>
+                <td>Min from Barycenter AU</td>
+                <td class="calc-data star-a" id="star-a-barycenter-min"></td>
+                <td class="calc-data star-b" id="star-b-barycenter-min"></td>
+              </tr>
+            </table>
           </div>
           <div id="shared-content" class="star-tab hidden">
-            SHARED
+            <table>
+              <tr>
+                <th><label for="group-selector">Star Group</label></th>
+                <th class="user-data group-name" id="star-shared-group-name">
+                <select name="group-selector" class="group-selector">
+                </select>
+              </th>
+              </tr>
+              <tr>
+                <td>Average Separation AU</td>
+                <td class="calc-data"><input id="shared-separation-avg"></td>
+              </tr>
+              <tr>
+                <td>Min Separation AU</td>
+                <td class="calc-data" id="shared-separation-min"></td>
+              </tr>
+              <tr>
+                <td>Max Separation AU</td>
+                <td class="calc-data" id="shared-separation-max"></td>
+              </tr>
+              <tr>
+                <td>Orbital Period Yr</td>
+                <td class="calc-data" id="shared-orbital-period"></td>
+              </tr>
+              <tr>
+                <td>Inner Planet Limit AU</td>
+                <td class="calc-data" id="shared-planet-inner"></td>
+              </tr>
+              <tr>
+                <td>Outer Planet Limit AU</td>
+                <td class="calc-data" id="shared-planet-outer"></td>
+              </tr>
+              <tr>
+                <td>Inner Habitable Zone AU</td>
+                <td class="calc-data" id="shared-habitable-inner"></td>
+              </tr>
+              <tr>
+                <td>Outer Habitable Zone AU</td>
+                <td class="calc-data" id="shared-habitable-outer"></td>
+              </tr>
+              <tr>
+                <td>Frost Line AU</td>
+                <td class="calc-data" id="shared-frost-line"></td>
+              </tr>
+              <tr>
+              <tr>
+                <td>Inner Death Zone AU</td>
+                <td class="calc-data" id="shared-death-inner"></td>
+              </tr>
+              <tr>
+                <td>Outer Death Zone AU</td>
+                <td class="calc-data" id="shared-death-outer"></td>
+              </tr>
+            </table>
           </div>
         </div>
         <div id="planets-content" class="tab hidden">
@@ -335,7 +426,7 @@
   </div>
   </div>
 
-
+  <script src="js/system_list.js"></script>
   <script src="js/scripts.js"></script>
 </body>
 </html>
