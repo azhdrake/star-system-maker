@@ -50,7 +50,7 @@
 
       <!-- Header -->
       <div id="header">
-        <div class="title">Current System: Example System <span id="system-name"></span></div>
+        <div class="title">Current System: <span id="system-name"></span></div>
         <div id="object-select">
           <button class="object-button selected-button top-btn" id="stars">Stars</button>
           <button class="object-button top-btn" id="planets">Panets</button>
@@ -133,7 +133,7 @@
               </tr>
             </table> 
           </div>
-          <div id="group-content" class="star-tab hidden">
+          <div id="group-choose-table" class="hidden">
             <table>
               <tr>
                 <th><label for="group-selector">Star Group</label></th>
@@ -142,6 +142,10 @@
                 </select>
               </th>
               </tr>
+            </table>
+          </div>
+          <div id="group-content" class="star-tab hidden">
+            <table>
               <tr>
                 <th>Star</th>
                 <th id="group-star-a">Star A</th>
@@ -176,13 +180,7 @@
           </div>
           <div id="shared-content" class="star-tab hidden">
             <table>
-              <tr>
-                <th><label for="group-selector">Star Group</label></th>
-                <th class="user-data group-name" id="star-shared-group-name">
-                <select name="group-selector" class="group-selector">
-                </select>
-              </th>
-              </tr>
+
               <tr>
                 <td>Average Separation AU</td>
                 <td class="calc-data"><input id="shared-separation-avg"></td>

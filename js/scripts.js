@@ -32,6 +32,8 @@ const group_selector = document.querySelectorAll(".group-selector");
 const save_button = document.querySelector("#save-button");
 const load_button = document.querySelector("#load-button");
 
+const system_name_field = document.querySelector("#system-name");
+
 stars_button.addEventListener("click", function(){ open_tab("stars-content", "tab")} );
 planets_button.addEventListener("click", function(){ open_tab("planets-content", "tab")});
 moons_button.addEventListener("click", function(){ open_tab("moons-content", "tab")});
@@ -64,7 +66,14 @@ function open_tab(tab_name, tab_group) {
   for (var i = 0; i < tab.length; i++) {
     tab[i].classList.add("hidden");  
   }
-  document.getElementById(tab_name).classList.remove("hidden"); 
+  document.getElementById(tab_name).classList.remove("hidden");
+  
+  table_header = document.querySelector("#group-choose-table");
+  if(tab_name == "group-content" || tab_name == "shared-content"){
+    table_header.classList.remove("hidden");
+  } else {
+    table_header.classList.add("hidden");
+  }
 }
 
 function select_button(btn, btn_group){
@@ -151,6 +160,7 @@ function fill_planet_selector(){
 
 function system_select(selected_system_id){
   system_id = selected_system_id;
+  system_name_field.innerHTML = system_list[system_id]["Name"]
   fill_star_selector();
   fill_planet_selector();
   fill_group_selector();
@@ -437,9 +447,11 @@ function upload(file){
     calc_time();
     load_time();
     fill_system_select();
+    fill_group_selector();
     fill_star_selector();
     fill_planet_selector();
-    fill_group_selector();
+
+    system_name_field.innerHTML = system_list[0]["Name"]
   }
 }
 
@@ -486,6 +498,7 @@ function load_time(body_type, e){
   calc_time();
  }
 
+system_name_field.innerHTML = system_list[0]["Name"]
 fill_system_select();
 fill_star_selector();
 fill_planet_selector();
