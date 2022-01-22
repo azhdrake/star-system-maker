@@ -164,6 +164,7 @@ function system_select(selected_system_id){
   fill_star_selector();
   fill_planet_selector();
   fill_group_selector();
+  load_time()
 }
 
 /***************
@@ -250,8 +251,8 @@ const planet_sec_earth_field = document.querySelector("#planet-sec-earth");
 
 star_mass_field.addEventListener('input', function(){ save_time()} );
 
-star_a_eccentrisity_field.addEventListener('input', function(){ save_time(0)} );
-star_b_eccentrisity_field.addEventListener('input', function(){ save_time(1)} );
+star_a_eccentrisity_field.addEventListener('input', function(){ save_time()} );
+star_b_eccentrisity_field.addEventListener('input', function(){ save_time()} );
 
 shared_separation_avg_field.addEventListener('input', function(){ save_time()} );
 
@@ -377,11 +378,11 @@ console.log(shared_separation_avg * (star_b_mass / (Number(star_a_mass) + Number
 /***************
  * Saving Data *
  ***************/
-function save_time(sub_group){
+function save_time(){
   if(group_id == 2){
-    system_list[system_id]["Average Separation"] = shared_separation_avg;
-    system_list[system_id]["Star Groups"][0]["Eccentrisity"] = star_a_eccentrisity;
-    system_list[system_id]["Star Groups"][1]["Eccentrisity"] = star_b_eccentrisity;
+    system_list[system_id]["Average Separation"] = shared_separation_avg_field.value;
+    system_list[system_id]["Star Groups"][0]["Eccentrisity"] = star_a_eccentrisity_field.value;
+    system_list[system_id]["Star Groups"][1]["Eccentrisity"] = star_b_eccentrisity_field.value;
   } else {
     for(let i = 0; i < system_list[system_id]["Star Groups"].length; i++){
       if(system_list[system_id]["Star Groups"][i]["ID"] == group_id){
@@ -394,19 +395,19 @@ function save_time(sub_group){
             system_list[system_id]["Star Groups"][i]["Stars"][k]["Eccentrisity"] = star_b_eccentrisity_field.value;
           }
           if(system_list[system_id]["Star Groups"][i]["Stars"][k]["ID"] == star_id){
-            system_list[system_id]["Star Groups"][i]["Stars"][k]["Mass"] = star_mass;
+            system_list[system_id]["Star Groups"][i]["Stars"][k]["Mass"] = star_mass_field.value;
             for(let j = 0; j < system_list[system_id]["Star Groups"][i]["Planets"].length; j++){
               if(system_list[system_id]["Star Groups"][i]["Planets"][j]["ID"] == planet_id){
-                system_list[system_id]["Star Groups"][i]["Planets"][j]["Mass"] = planet_mass;
-                system_list[system_id]["Star Groups"][i]["Planets"][j]["Radius"] = planet_rad;
-                system_list[system_id]["Star Groups"][i]["Planets"][j]["Eccentricity"] = planet_eccentricity;
-                system_list[system_id]["Star Groups"][i]["Planets"][j]["Semi-Major Axis"] = planet_semimajor;
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Mass"] = planet_mass_field.value;
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Radius"] = planet_radius_field.value;
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Eccentricity"] = planet_eccentricity_field.value;
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Semi-Major Axis"] = planet_semimajor_field.value;
                 system_list[system_id]["Star Groups"][i]["Planets"][j]["Axial Tilt"] = "";
-                system_list[system_id]["Star Groups"][i]["Planets"][j]["Day Length"] = planet_day_hours;
-                system_list[system_id]["Star Groups"][i]["Planets"][j]["Months/Year"] = planet_months_year;
-                system_list[system_id]["Star Groups"][i]["Planets"][j]["Hour/Day"] = planet_hour_local;
-                system_list[system_id]["Star Groups"][i]["Planets"][j]["Min/Hr"] = planet_min_local;
-                system_list[system_id]["Star Groups"][i]["Planets"][j]["Sec/Min"] = planet_sec_local;
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Day Length"] = planet_day_hours_field.value;
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Months/Year"] = planet_months_year_field.value;
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Hour/Day"] = planet_hour_local_field.value;
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Min/Hr"] = planet_min_local_field.value;
+                system_list[system_id]["Star Groups"][i]["Planets"][j]["Sec/Min"] = planet_sec_local_field.value;
               }
             }
           }
