@@ -13,13 +13,23 @@
   <meta property="og:description" content="A simple HTML5 Template for new projects.">
   <meta property="og:image" content="image.png">
 
-  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" href="favicon.ico">
 
   <link rel="stylesheet" href="css/styles.css?v=1.0">
 
 </head>
 
 <body>
+  <!-- help window -->
+  <div id="dim-page" class="hidden">
+    <div id="help-window">
+      <span id="help-info"></span>
+    </div>
+  </div>
+
+  <!-- help tooltip -->
+  <div id="help-tooltip" class="hidden"></div>
+
   <!-- Sidebar -->
   <div id="flex-content">
   <div id="all-content">
@@ -77,58 +87,72 @@
                 </th>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="solar-masses-btn" class="help-btn"> ? </button></td>
                 <td>Mass ☉</td>
                 <td class="user-data"><input id="star-mass" type="text"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="kg-masses-btn" class="help-btn"> ? </button></td>
                 <td>Mass kg</td>
                 <td class="calc-data" id="star-mass-metric">1.49x10^30</td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="solar-luminosity-btn" class="help-btn"> ? </button></td>
                 <td>Luminosity ☉</td>
                 <td class="calc-data" id="star-luminosity">0.42</td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="solar-diameter-btn" class="help-btn"> ? </button></td>
                 <td>Diameter ☉</td>
                 <td class="calc-data" id="star-diamter">0.81</td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="km-diameter-btn" class="help-btn"> ? </button></td>
                 <td>Diameter km</td>
                 <td class="calc-data" id="star-diamter-metric">1.13x10^6</td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="solar-temp-btn" class="help-btn"> ? </button></td>
                 <td>Temperature ☉</td>
                 <td class="calc-data" id="star-temp">0.86</td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="k-temp-btn" class="help-btn"> ? </button></td>
                 <td>Temperature K</td>
                 <td class="calc-data" id="star-temp-metric">4996</td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="solar-lifetime-btn" class="help-btn"> ? </button></td>
                 <td>Lifetime ☉</td>
                 <td class="calc-data" id="star-lifetime">2.05</td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="year-lifetime-btn" class="help-btn"> ? </button></td>
                 <td>Lifetime Yr</td>
                 <td class="calc-data" id="star-lifetime-year">1.64x10^10</td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="inner-planet-btn" class="help-btn"> ? </button></td>
                 <td>Inner Planet Limit AU</td>
                 <td class="calc-data" id="star-planet-inner">0.08</td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="outer-planet-btn" class="help-btn"> ? </button></td>
                 <td>Outer Planet Limit AU</td>
                 <td class="calc-data" id="star-planet-outer">30</td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="inner-habitable-btn" class="help-btn"> ? </button></td>
                 <td>Inner Habitable Zone</td>
                 <td class="calc-data" id="star-habitable-inner">0.62</td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="outer-habitable-btn" class="help-btn"> ? </button></td>
                 <td>Outer Habitable Zone</td>
                 <td class="calc-data" id="star-habitable-outer">0.89</td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="frost-btn" class="help-btn"> ? </button></td>
                 <td>Frost Line</td>
                 <td class="calc-data" id="star-frost">3.15</td>
               </tr>
@@ -151,26 +175,31 @@
                 <th id="group-star-b">Star B</th>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="star-eccentrisity-btn" class="help-btn"> ? </button></td>
                 <td>Eccentrisity</td>
                 <td class="user-data star-a"> <input id="star-a-eccentrisity"></td>
                 <td class="user-data star-b"> <input id="star-b-eccentrisity"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="star-semi-major-btn" class="help-btn"> ? </button></td>
                 <td>Semi-Major Axis AU</td>
                 <td class="calc-data star-a" id="star-a-semimajor"></td>
                 <td class="calc-data star-b" id="star-b-semimajor"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="star-avg-bary-btn" class="help-btn"> ? </button></td>
                 <td>Average Barycenter AU</td>
                 <td class="calc-data star-a" id="star-a-barycenter"></td>
                 <td class="calc-data star-b" id="star-b-barycenter"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="star-max-bary-btn" class="help-btn"> ? </button></td>
                 <td>Max from Barycenter AU</td>
                 <td class="calc-data star-a" id="star-a-barycenter-max"></td>
                 <td class="calc-data star-b" id="star-b-barycenter-max"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="star-min-bary-btn" class="help-btn"> ? </button></td>
                 <td>Min from Barycenter AU</td>
                 <td class="calc-data star-a" id="star-a-barycenter-min"></td>
                 <td class="calc-data star-b" id="star-b-barycenter-min"></td>
@@ -181,47 +210,58 @@
             <table>
 
               <tr>
+                <td class="help-btn-td"><button id="star-avg-separation-btn" class="help-btn"> ? </button></td>
                 <td>Average Separation AU</td>
                 <td class="calc-data"><input id="shared-separation-avg"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="star-min-separation-btn" class="help-btn"> ? </button></td>
                 <td>Min Separation AU</td>
                 <td class="calc-data" id="shared-separation-min"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="star-max-separation-btn" class="help-btn"> ? </button></td>
                 <td>Max Separation AU</td>
                 <td class="calc-data" id="shared-separation-max"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="star-orbital-period-btn" class="help-btn"> ? </button></td>
                 <td>Orbital Period Yr</td>
                 <td class="calc-data" id="shared-orbital-period"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="shared-inner-planet-btn" class="help-btn"> ? </button></td>
                 <td>Inner Planet Limit AU</td>
                 <td class="calc-data" id="shared-planet-inner"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="shared-outer-planet-btn" class="help-btn"> ? </button></td>
                 <td>Outer Planet Limit AU</td>
                 <td class="calc-data" id="shared-planet-outer"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="shared-inner-habit-btn" class="help-btn"> ? </button></td>
                 <td>Inner Habitable Zone AU</td>
                 <td class="calc-data" id="shared-habitable-inner"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="shared-outer-habit-btn" class="help-btn"> ? </button></td>
                 <td>Outer Habitable Zone AU</td>
                 <td class="calc-data" id="shared-habitable-outer"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="shared-frost-btn" class="help-btn"> ? </button></td>
                 <td>Frost Line AU</td>
                 <td class="calc-data" id="shared-frost-line"></td>
               </tr>
               <tr>
               <tr>
+                <td class="help-btn-td"><button id="shared-inner-death-btn" class="help-btn"> ? </button></td>
                 <td>Inner Death Zone AU</td>
                 <td class="calc-data" id="shared-death-inner"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="shared-outer-death-btn" class="help-btn"> ? </button></td>
                 <td>Outer Death Zone AU</td>
                 <td class="calc-data" id="shared-death-outer"></td>
               </tr>
@@ -251,74 +291,92 @@
           <div id="physical-content" class="planet-tab">
             <table>
               <tr>
+                <td class="help-btn-td"><button id="planet-mass-btn" class="help-btn"> ? </button></td>
                 <td>Mass 🜨</td>
                 <td class="user-data"> <input id="planet-mass"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-mass-kg-btn" class="help-btn"> ? </button></td>
                 <td>Mass kg</td>
                 <td class="calc-data" id="planet-mass-metric"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-rad-btn" class="help-btn"> ? </button></td>
                 <td>Radius 🜨</td>
                 <td class="user-data"> <input id="planet-radius"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-rad-km-btn" class="help-btn"> ? </button></td>
                 <td>Radius km</td>
                 <td class="calc-data" id="planet-radius-metric"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-gravity-btn" class="help-btn"> ? </button></td>
                 <td>Gravity 🜨</td>
                 <td class="calc-data" id="planet-gravity"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-gravity-metric-btn" class="help-btn"> ? </button></td>
                 <td>Gravity m/s^2</td>
                 <td class="calc-data" id="planet-gravity-metric"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-density-btn" class="help-btn"> ? </button></td>
                 <td>Density 🜨</td>
                 <td class="calc-data" id="planet-density"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-density-metric-btn" class="help-btn"> ? </button></td>
                 <td>Density g/cm^3</td>
                 <td class="calc-data" id="planet-density-metric"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-escape-btn" class="help-btn"> ? </button></td>
                 <td>Escape Velocity 🜨</td>
                 <td class="calc-data" id="planet-velocity"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-escape-metric-btn" class="help-btn"> ? </button></td>
                 <td>Escape Velocity km/s</td>
                 <td class="calc-data" id="planet-velocity-metric"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-circumference-btn" class="help-btn"> ? </button></td>
                 <td>Circumference 🜨</td>
                 <td class="calc-data" id="planet-circumference"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-circomference-km-btn" class="help-btn"> ? </button></td>
                 <td>Circumference km</td>
                 <td class="calc-data" id="planet-circumference-metric"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-surface-btn" class="help-btn"> ? </button></td>
                 <td>Surface Area 🜨</td>
                 <td class="calc-data" id="planet-area"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-surface-metric-btn" class="help-btn"> ? </button></td>
                 <td>Surface Area km^2</td>
                 <td class="calc-data" id="planet-area-metric"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-volume-btn" class="help-btn"> ? </button></td>
                 <td>Volume 🜨</td>
                 <td class="calc-data" id="planet-volume"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-volume-km-btn" class="help-btn"> ? </button></td>
                 <td>Volume km^3</td>
                 <td class="calc-data" id="planet-volume-metric"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-temp-btn" class="help-btn"> ? </button></td>
                 <td>Average Temperature 🜨</td>
                 <td class="calc-data" id="planet-temp"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-temp-k-btn" class="help-btn"> ? </button></td>
                 <td>Average Temperature K</td>
                 <td class="calc-data" id="planet-temp-metric"></td>
               </tr>
@@ -327,42 +385,52 @@
           <div id="orbit-content" class="planet-tab hidden">
             <table>
               <tr>
+                <td class="help-btn-td"><button id="planet-eccentricity-btn" class="help-btn"> ? </button></td>
                 <td>Eccentricity</td>
                 <td class="user-data"> <input id="planet-eccentricity"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-semi-major-btn" class="help-btn"> ? </button></td>
                 <td>Semi-Major Axis AU</td>
                 <td class="calc-data"> <input id="planet-semimajor"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-semi-minor-btn" class="help-btn"> ? </button></td>
                 <td>Semi-Minor Axis AU</td>
                 <td class="calc-data" id="planet-semiminor"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-periapsis-btn" class="help-btn"> ? </button></td>
                 <td>Periapsis AU</td>
                 <td class="calc-data" id="planet-periapsis"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-apoapsis-btn" class="help-btn"> ? </button></td>
                 <td>Apoapsis</td>
                 <td class="calc-data" id="planet-apoapsis"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-period-btn" class="help-btn"> ? </button></td>
                 <td>Orbital Period</td>
                 <td class="calc-data" id="planet-period"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-year-btn" class="help-btn"> ? </button></td>
                 <td>Year (Earth Days)</td>
                 <td class="calc-data" id="planet-year-earth"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-velocity-btn" class="help-btn"> ? </button></td>
                 <td>Orbital velocity</td>
                 <td class="calc-data" id="planet-orbital-velocity"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-hill-inner-btn" class="help-btn"> ? </button></td>
                 <td>Hill Sphere inner</td>
                 <td class="calc-data" id="planet-inner-hill"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-hill-outer-btn" class="help-btn"> ? </button></td>
                 <td>Hill Sphere Outer</td>
                 <td class="calc-data" id="planet-outer-hill"></td>
               </tr>
@@ -371,42 +439,52 @@
           <div id="time-content" class="planet-tab hidden">
             <table>
               <tr>
-                <td>Day Length (Hours)</td>
+                <td class="help-btn-td"><button id="planet-day-hours-btn" class="help-btn"> ? </button></td>
+                <td>Day Length (Earth Hours)</td>
                 <td class="user-data"> <input id="planet-year-hours"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-year-local-btn" class="help-btn"> ? </button></td>
                 <td>Year (Local Days)</td>
                 <td class="calc-data" id="planet-year-local"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-months-year-btn" class="help-btn"> ? </button></td>
                 <td>Months / Year</td>
                 <td class="user-data"> <input id="planet-months-year"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-day-month-btn" class="help-btn"> ? </button></td>
                 <td>Local Days per Month</td>
                 <td class="calc-data" id="planet-days-month"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-hour-day-btn" class="help-btn"> ? </button></td>
                 <td>Local Hour / Local Day</td>
                 <td class="user-data"> <input id="planet-hour-local"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-hour-hour-btn" class="help-btn"> ? </button></td>
                 <td>Local Hrs / Earth Hr</td>
                 <td class="calc-data" id="planet-hour-earth"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-min-hour-btn" class="help-btn"> ? </button></td>
                 <td>Local Min / Local Hr</td>
                 <td class="user-data"> <input  id="planet-min-local"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-min-min-btn" class="help-btn"> ? </button></td>
                 <td>Local Min / Earth Min</td>
                 <td class="calc-data" id="planet-min-earth"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-sec-min-btn" class="help-btn"> ? </button></td>
                 <td>Local Sec / Local Min</td>
                 <td class="user-data"> <input id="planet-sec-local"></td>
               </tr>
               <tr>
+                <td class="help-btn-td"><button id="planet-sec-sec-btn" class="help-btn"> ? </button></td>
                 <td>Local Sec / Earth Sec</td>
                 <td class="calc-data" id="planet-sec-earth"></td>
               </tr>
@@ -425,6 +503,7 @@
   </div>
   </div>
 
+  <script src="js/help.js"></script>
   <script src="js/system_list.js"></script>
   <script src="js/scripts.js"></script>
 </body>

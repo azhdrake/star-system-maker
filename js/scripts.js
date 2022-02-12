@@ -1,6 +1,6 @@
-/****************
+/****************\
  * Data Storage *
- ****************/
+\****************/
 
 const SYSTEM = 0;
 const GROUP  = 1;
@@ -10,9 +10,9 @@ const MOON   = 4;
 
 let system_id = group_id = star_id = planet_id = 0;
 
-/***********************
+/***********************\
  * Tabs and Navigation *
- ***********************/
+\***********************/
 
 const stars_button = document.querySelector("#stars");
 const planets_button = document.querySelector("#planets");
@@ -65,6 +65,19 @@ shared_button.addEventListener("click", function(){ select_button(shared_button,
 
 save_button.addEventListener("click", function(){ download(JSON.stringify(system_list), "Star System Save Data.txt")} )
 load_button.addEventListener("input", function(){ upload(load_button.files[0])} )
+
+const page_dimmer = document.querySelector("#dim-page");
+const help_window = document.querySelector("#help-info");
+const help_tooltip = document.querySelector("#help-tooltip");
+
+page_dimmer.addEventListener("click", function(){ page_dimmer.classList.add("hidden"); });
+
+help_btns = document.querySelectorAll(".help-btn");
+for(let i = 0; i < help_btns.length; i++){
+  help_btns[i].addEventListener("click", function(){ get_help(help_btns[i].id)} );
+  help_btns[i].addEventListener("mouseenter", function(){ help_hover(event, help_btns[i].id)} );
+  help_btns[i].addEventListener("mouseleave", function(){ help_tooltip.classList.add("hidden");} );
+}
 
 function open_tab(tab_name, tab_group) {
   var tab = document.getElementsByClassName(tab_group);
@@ -123,15 +136,6 @@ function fill_selectors(type){
     btn.addEventListener( "click", function(){ sidebar_select(i, type);} );
     parent_div.appendChild(child_div);
     child_div.appendChild(btn);
-  }
-}
-
-function clear_body_names(type){
-  if(type == STAR){type ++;}
-  name_field_list = [moon_name_field, planet_name_field, star_name_field, group_name_field]
-  for (let i = 0; i < (4-type); i++) {
-    for (let j = 0; j < name_field_list[i].length; j++)
-      name_field_list[i][j].innerHTML = "";
   }
 }
 
@@ -204,115 +208,31 @@ function sidebar_select(selected_id, type){
   load_time();
 }
 
-/* function system_select(selected_system_id){
-  system_id = selected_system_id;
-
-  let active_system = document.getElementById("system-div-" + selected_system_id);
-  system_name_field.innerHTML = system_list[selected_system_id]["Name"];
-  
-  for(i=0; i<system_list[system_id]["Star Groups"].length; i++){
-    let group_div = document.getElementById("group-div-" + system_list[system_id]["Star Groups"][i]["ID"]);
-
-    if(group_div){
-      group_div.parentNode.removeChild(group_div);
+function get_help(btn_id){
+  for(btn_name in help){
+    if(btn_name == btn_id){
+      page_dimmer.classList.remove("hidden");
+      help_window.innerHTML = help[btn_name];
     }
-
-    let new_group_div = document.createElement("div");
-    new_group_div.id  = "group-div-" + system_list[system_id]["Star Groups"][i]["ID"];
-    new_group_div.classList.add("indent");
-    new_group_div.classList.add("full-length-flex");
-    //new_group_div.innerHTML = "TESTING"
-
-    active_system.appendChild(new_group_div);
   }
-
-  fill_group_selector();
-  
-  //fill_planet_selector();
-  load_time()
 }
 
-function group_select(selected_group_id){
-  group_id = selected_group_id;
+function help_hover(event, btn_id){
+  for(btn_name in help){
+    if(btn_name == btn_id){
+      help_tooltip.classList.remove("hidden");
+      help_tooltip.innerHTML = help[btn_name];
 
-  let active_group = document.getElementById("group-div-" + selected_group_id);
-  
-  for(i=0; i<system_list[system_id]["Star Groups"][group_id]["Stars"].length; i++){
-    let star_div = document.getElementById("star-div-" + system_list[system_id]["Star Groups"][group_id]["Stars"][i]["ID"]);
+      help_tooltip.style.left = event.pageX + 'px';
+      help_tooltip.style.top = event.pageY + 'px';
 
-    if(star_div){
-      star_div.parentNode.removeChild(star_div);
     }
-
-    let new_star_div = document.createElement("div");
-    new_star_div.id  = "star-div-" + system_list[system_id]["Star Groups"][group_id]["Stars"][i]["ID"];
-    new_star_div.classList.add("indent");
-    new_star_div.classList.add("full-length-flex");
-    //new_star_div.innerHTML = "TESTING"
-
-    active_group.appendChild(new_star_div);
   }
-
-  fill_star_selector();
-  //fill_planet_selector();
-  load_time()
 }
 
-function star_select(selected_star_id){
-  star_id = selected_star_id;
-
-  let active_star = document.getElementById("star-div-" + selected_star_id);
-  
-  for(i=0; i<system_list[system_id]["Star Groups"][group_id]["Stars"][star_id]["Planets"].length; i++){
-    let planet_div = document.getElementById("star-div-" + system_list[system_id]["Star Groups"][group_id]["Stars"][star_id]["ID"]);
-
-    if(planet_div){
-      planet_div.parentNode.removeChild(planet_div);
-    }
-
-    let new_planet_div = document.createElement("div");
-    new_planet_div.id  = "planet-div-" + system_list[system_id]["Star Groups"][group_id]["Stars"][star_id]["Planets"][i]["ID"];
-    new_planet_div.classList.add("indent");
-    new_planet_div.classList.add("full-length-flex");
-    new_planet_div.innerHTML = "TESTING"
-
-    active_star.appendChild(new_planet_div);
-  }
-
-  fill_planet_selector();
-  load_time()
-}
-
-// function planet_select(selected_planet_id){
-//   planet_id = selected_planet_id;
-
-//   let active_planet = document.getElementById("planet-div-" + selected_planet_id);
-  
-//   for(i=0; i<system_list[system_id]["Star Groups"][group_id]["Stars"][star_id]["Planets"].length; i++){
-//     let planet_div = document.getElementById("star-div-" + system_list[system_id]["Star Groups"][group_id]["Stars"][star_id]["ID"]);
-
-//     if(planet_div){
-//       planet_div.parentNode.removeChild(planet_div);
-//     }
-
-//     let new_planet_div = document.createElement("div");
-//     new_planet_div.id  = "planet-div-" + system_list[system_id]["Star Groups"][group_id]["Stars"][star_id]["Planets"][i]["ID"];
-//     new_planet_div.classList.add("indent");
-//     new_planet_div.classList.add("full-length-flex");
-//     new_planet_div.innerHTML = "TESTING"
-
-//     active_star.appendChild(new_planet_div);
-//   }
-
-//   // fill_planet_selector();
-//   load_time()
-// }
-
-*/
-
-/***************
+/***************\
  * Caculations *
- ***************/
+\***************/
 const star_mass_field = document.querySelector("#star-mass");
 const star_mass_metric_field = document.querySelector("#star-mass-metric");
 const star_luminosity_field = document.querySelector("#star-luminosity");
@@ -515,9 +435,9 @@ function calc_time(){
   planet_sec_earth_field.innerHTML = (planet_min_earth / planet_sec_local) * 60;
 }
 
-/***************
+/***************\
  * Saving Data *
- ***************/
+\***************/
 function save_time(){
   if(group_id == 2){
     system_list[system_id]["Average Separation"] = shared_separation_avg_field.value;
@@ -576,9 +496,9 @@ function download(data, filename) {
   }
 }
 
-/****************
+/****************\
  * Loading Data *
- ****************/ 
+\****************/ 
 
 function upload(file){
   let reader = new FileReader();
@@ -641,6 +561,19 @@ function load_time(body_type, e){
   calc_time();
  }
 
+ 
+function clear_body_names(type){
+  if(type == STAR){ return; }
+  name_field_list = [moon_name_field, planet_name_field, star_name_field, group_name_field]
+  for (let i = 0; i < (4-type); i++) {
+    for (let j = 0; j < name_field_list[i].length; j++)
+      name_field_list[i][j].innerHTML = "";
+  }
+}
+
+/********\
+ * MISC *
+\********/ 
 
 for (let i = 0; i < system_name_field.length; i++) {
   system_name_field[i].innerHTML = system_list[0]["Name"]
