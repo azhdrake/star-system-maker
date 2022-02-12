@@ -2,10 +2,11 @@
  * Data Storage *
  ****************/
 
-const STAR = 0;
-const PLANET = 1;
-const MOON = 2;
-const GROUP = 3;
+const SYSTEM = 0;
+const GROUP  = 1;
+const STAR   = 2;
+const PLANET = 3;
+const MOON   = 4;
 
 let system_id = group_id = star_id = planet_id = 0;
 
@@ -32,7 +33,11 @@ const group_selector = document.querySelectorAll(".group-selector");
 const save_button = document.querySelector("#save-button");
 const load_button = document.querySelector("#load-button");
 
-const system_name_field = document.querySelector("#system-name");
+const system_name_field = document.querySelectorAll(".system-name");
+const group_name_field = document.querySelectorAll(".group-name");
+const star_name_field = document.querySelectorAll(".star-name");
+const planet_name_field = document.querySelectorAll(".planet-name");
+const moon_name_field = document.querySelectorAll(".moon-name");
 
 stars_button.addEventListener("click", function(){ open_tab("stars-content", "tab")} );
 planets_button.addEventListener("click", function(){ open_tab("planets-content", "tab")});
@@ -84,88 +89,226 @@ function select_button(btn, btn_group){
   btn.classList.add("selected-button")
 }
 
-function fill_system_select(){
-  let sidebar = document.getElementById("systems");
+function fill_selectors(type){
+  let parent_div;
+  if(type == SYSTEM){
+    parent_div = document.getElementById("systems");
+    parent_div.innerHTML = "";
+    section = system_list;
+  } else if(type == GROUP){
+    section = system_list[system_id]["Star Groups"];
+    parent_div = document.getElementById("div2-" + type);
+  } else if(type == STAR){ 
+    section = system_list[system_id]["Star Groups"][group_id]["Stars"];
+    parent_div = document.getElementById("div2-" + type);
+  } else if(type == PLANET){
+    section = system_list[system_id]["Star Groups"][group_id]["Planets"];
+    parent_div = document.getElementById("div2-" + type);
+  } else if(type == MOON){ 
+    section = system_list[system_id]["Star Groups"][group_id]["Planets"][planet_id]["Moons"];
+    parent_div = document.getElementById("div2-" + type);
+  } else {
+    return
+  }
   
-  sidebar.innerHTML = "";
-  
-  for (let i = 0; i < system_list.length; i++){
-    let el = document.createElement("button");
-    el.innerHTML = system_list[i]["Name"];
-    el.id = "system-" + system_list[i]["ID"];
-    el.classList.add("sidebar-item")
-    el.addEventListener("click", function(){ system_select(system_list[i]["ID"])} )
-    sidebar.appendChild(el);
+  for (let i = 0; i < section.length; i++){
+    let child_div = document.createElement("div");
+    child_div.classList.add("full-length-flex");
+    child_div.id = type + "-div-" + section[i]["ID"];
+
+    let btn = document.createElement("button");
+    btn.innerHTML = section[i]["Name"];
+    btn.classList.add("sidebar-item");
+
+    btn.addEventListener( "click", function(){ sidebar_select(i, type);} );
+    parent_div.appendChild(child_div);
+    child_div.appendChild(btn);
   }
 }
 
-function fill_group_selector(){
-  for(let l = 0; l < group_selector.length; l++){
-    group_selector[l].innerHTML = "";
+function clear_body_names(type){
+  if(type == STAR){type ++;}
+  name_field_list = [moon_name_field, planet_name_field, star_name_field, group_name_field]
+  for (let i = 0; i < (4-type); i++) {
+    for (let j = 0; j < name_field_list[i].length; j++)
+      name_field_list[i][j].innerHTML = "";
   }
-  for(let i = 0; i < group_selector.length; i++){
-    group_selector[i].addEventListener("change", function(){load_time(GROUP, this.value)} );
-    group_selector[i].addEventListener("change", fill_planet_selector);
+}
 
-    for(let j = 0; j < system_list[system_id]["Star Groups"].length; j++) {
-      let el = document.createElement("option");
-      el.textContent = system_list[system_id]["Star Groups"][j]["Stars"][0]["Name"] + " & " + system_list[system_id]["Star Groups"][j]["Stars"][1]["Name"];
-      el.value = system_list[system_id]["Star Groups"][j]["ID"];
-      group_selector[i].appendChild(el);
+function sidebar_select(selected_id, type){
+  if(type == SYSTEM){ 
+    system_id = selected_id; 
+    section = system_list[system_id];
+    for (let i = 0; i < system_name_field.length; i++) {
+      system_name_field[i].innerHTML = section["Name"];
+      clear_body_names(type)
     }
+  } else if(type == GROUP){ 
+    group_id = selected_id;
+    section = system_list[system_id]["Star Groups"][group_id];
+    for (let i = 0; i < group_name_field.length; i++) {
+      group_name_field[i].innerHTML = section["Name"];
+      clear_body_names(type)
+    } 
+  } else if(type == STAR){ 
+    star_id = selected_id; 
+    section = system_list[system_id]["Star Groups"][group_id]["Stars"][star_id];
+    for (let i = 0; i < star_name_field.length; i++) {
+      star_name_field[i].innerHTML = section["Name"];
+      clear_body_names(type)
+    } 
+  } else if(type == PLANET){
+    planet_id = selected_id; 
+    section = system_list[system_id]["Star Groups"][group_id]["Planets"][planet_id];
+    for (let i = 0; i < planet_name_field.length; i++) {
+      planet_name_field[i].innerHTML = section["Name"];
+      clear_body_names(type)
+    } 
+  } else if(type == MOON){ 
+    moon_id = selected_id; 
+    section = system_list[system_id]["Star Groups"][group_id]["Planets"][planet_id]["Moons"][moon_id];
+    for (let i = 0; i < moon_name_field.length; i++) {
+      moon_name_field[i].innerHTML = section["Name"];
+    } 
   }
-}
 
-function fill_star_selector(){
-  for(let l = 0; l < star_selector.length; l++){
-    star_selector[l].innerHTML = "";
-  }
-  for(let i = 0; i < star_selector.length; i++){
-    star_selector[i].addEventListener("change", function(){load_time(STAR, this.value)} );
-    star_selector[i].addEventListener("change", fill_planet_selector);
+  let parent_div = document.getElementById(type + "-div-" + selected_id);
 
-    for(let j = 0; j < system_list[system_id]["Star Groups"].length; j++) {
-      for(let k = 0; k < system_list[system_id]["Star Groups"][j]["Stars"].length; k++){
-        let el = document.createElement("option");
-        el.textContent = system_list[system_id]["Star Groups"][j]["Stars"][k]["Name"];
-        el.value = system_list[system_id]["Star Groups"][j]["Stars"][k]["ID"];
-        star_selector[i].appendChild(el);
-      }
-    }
-  }
-}
 
-function fill_planet_selector(){
-  for(let l = 0; l < planet_selector.length; l++){
-    planet_selector[l].innerHTML = "";
-  }
+  for(const grouping in section){
+    if(Array.isArray(section[grouping])){
+      for(let i=0;i<section[grouping].length;i++){
+        
+        let additive = 1;
+        if(grouping == "Planets"){ additive = 2; }
 
-  for(let i = 0; i < planet_selector.length; i++){
-    for(let j = 0; j < system_list[system_id]["Star Groups"].length; j++) {
-      for(let k = 0; k < system_list[system_id]["Star Groups"][j]["Stars"].length; k++){
-        if(system_list[system_id]["Star Groups"][j]["Stars"][k]["ID"] == star_id){
+        let child_div = document.getElementById("div2-" + (type + additive));
 
-          for(let k = 0; k < system_list[system_id]["Star Groups"][j]["Planets"].length; k++){
-            let el = document.createElement("option");
-            el.textContent = system_list[system_id]["Star Groups"][j]["Planets"][k]["Name"];
-            el.value = system_list[system_id]["Star Groups"][j]["Planets"][k]["ID"];
-            planet_selector[i].appendChild(el);
-            planet_selector[i].addEventListener("change", function(){load_time(PLANET, this.value)} );
-          }
+        if(child_div){
+          child_div.parentNode.removeChild(child_div);
         }
+
+        let new_child_div = document.createElement("div");
+        new_child_div.id  = "div2-" + (type + additive);
+        new_child_div.classList.add("indent");
+        new_child_div.classList.add("full-length-flex");
+        new_child_div.classList.add("sidebar-header")
+
+        parent_div.appendChild(new_child_div);
       }
     }
   }
+  if(type == GROUP){fill_selectors(type+2);}
+  if(type != STAR){ fill_selectors(type+1);}
+
+  load_time();
 }
 
-function system_select(selected_system_id){
+/* function system_select(selected_system_id){
   system_id = selected_system_id;
-  system_name_field.innerHTML = system_list[system_id]["Name"]
-  fill_star_selector();
-  fill_planet_selector();
+
+  let active_system = document.getElementById("system-div-" + selected_system_id);
+  system_name_field.innerHTML = system_list[selected_system_id]["Name"];
+  
+  for(i=0; i<system_list[system_id]["Star Groups"].length; i++){
+    let group_div = document.getElementById("group-div-" + system_list[system_id]["Star Groups"][i]["ID"]);
+
+    if(group_div){
+      group_div.parentNode.removeChild(group_div);
+    }
+
+    let new_group_div = document.createElement("div");
+    new_group_div.id  = "group-div-" + system_list[system_id]["Star Groups"][i]["ID"];
+    new_group_div.classList.add("indent");
+    new_group_div.classList.add("full-length-flex");
+    //new_group_div.innerHTML = "TESTING"
+
+    active_system.appendChild(new_group_div);
+  }
+
   fill_group_selector();
+  
+  //fill_planet_selector();
   load_time()
 }
+
+function group_select(selected_group_id){
+  group_id = selected_group_id;
+
+  let active_group = document.getElementById("group-div-" + selected_group_id);
+  
+  for(i=0; i<system_list[system_id]["Star Groups"][group_id]["Stars"].length; i++){
+    let star_div = document.getElementById("star-div-" + system_list[system_id]["Star Groups"][group_id]["Stars"][i]["ID"]);
+
+    if(star_div){
+      star_div.parentNode.removeChild(star_div);
+    }
+
+    let new_star_div = document.createElement("div");
+    new_star_div.id  = "star-div-" + system_list[system_id]["Star Groups"][group_id]["Stars"][i]["ID"];
+    new_star_div.classList.add("indent");
+    new_star_div.classList.add("full-length-flex");
+    //new_star_div.innerHTML = "TESTING"
+
+    active_group.appendChild(new_star_div);
+  }
+
+  fill_star_selector();
+  //fill_planet_selector();
+  load_time()
+}
+
+function star_select(selected_star_id){
+  star_id = selected_star_id;
+
+  let active_star = document.getElementById("star-div-" + selected_star_id);
+  
+  for(i=0; i<system_list[system_id]["Star Groups"][group_id]["Stars"][star_id]["Planets"].length; i++){
+    let planet_div = document.getElementById("star-div-" + system_list[system_id]["Star Groups"][group_id]["Stars"][star_id]["ID"]);
+
+    if(planet_div){
+      planet_div.parentNode.removeChild(planet_div);
+    }
+
+    let new_planet_div = document.createElement("div");
+    new_planet_div.id  = "planet-div-" + system_list[system_id]["Star Groups"][group_id]["Stars"][star_id]["Planets"][i]["ID"];
+    new_planet_div.classList.add("indent");
+    new_planet_div.classList.add("full-length-flex");
+    new_planet_div.innerHTML = "TESTING"
+
+    active_star.appendChild(new_planet_div);
+  }
+
+  fill_planet_selector();
+  load_time()
+}
+
+// function planet_select(selected_planet_id){
+//   planet_id = selected_planet_id;
+
+//   let active_planet = document.getElementById("planet-div-" + selected_planet_id);
+  
+//   for(i=0; i<system_list[system_id]["Star Groups"][group_id]["Stars"][star_id]["Planets"].length; i++){
+//     let planet_div = document.getElementById("star-div-" + system_list[system_id]["Star Groups"][group_id]["Stars"][star_id]["ID"]);
+
+//     if(planet_div){
+//       planet_div.parentNode.removeChild(planet_div);
+//     }
+
+//     let new_planet_div = document.createElement("div");
+//     new_planet_div.id  = "planet-div-" + system_list[system_id]["Star Groups"][group_id]["Stars"][star_id]["Planets"][i]["ID"];
+//     new_planet_div.classList.add("indent");
+//     new_planet_div.classList.add("full-length-flex");
+//     new_planet_div.innerHTML = "TESTING"
+
+//     active_star.appendChild(new_planet_div);
+//   }
+
+//   // fill_planet_selector();
+//   load_time()
+// }
+
+*/
 
 /***************
  * Caculations *
@@ -313,9 +456,6 @@ function calc_time(){
   star_a_semimajor = star_a_semimajor_field.innerHTML = (bary_max_a + bary_min_a) / 2;
   star_b_semimajor = star_b_semimajor_field.innerHTML = (bary_max_b + bary_min_b) / 2;
 
-console.log("bca: " + typeof(barycenter_a) + "; shared sep: " + typeof(shared_separation_avg) + "; star a mass: " + typeof(star_a_mass) + "; star b mass: " + typeof(star_b_mass))
-console.log(shared_separation_avg * (star_b_mass / (Number(star_a_mass) + Number(star_b_mass))))
-
   shared_min_sep = shared_separation_min_field.innerHTML = bary_min_a + bary_min_b;
   shared_max_sep = shared_separation_max_field.innerHTML = bary_max_a + bary_max_b;
   shared_period_field.innerHTML = ((2*Math.PI)*Math.sqrt((((star_a_semimajor+star_b_semimajor)*149600000000)^3)/(6.674E-11*(star_a_mass+star_b_mass))))/31540000;
@@ -447,12 +587,14 @@ function upload(file){
     system_list = JSON.parse(reader.result);
     calc_time();
     load_time();
-    fill_system_select();
-    fill_group_selector();
-    fill_star_selector();
-    fill_planet_selector();
-
-    system_name_field.innerHTML = system_list[0]["Name"]
+    fill_selectors(SYSTEM);
+    // fill_system_select();
+    // fill_group_selector();
+    // fill_star_selector();
+    // fill_planet_selector();
+    for (let i = 0; i < system_name_field.length; i++) {
+      system_name_field[i].innerHTML = system_list[0]["Name"]
+    }
   }
 }
 
@@ -499,9 +641,12 @@ function load_time(body_type, e){
   calc_time();
  }
 
-system_name_field.innerHTML = system_list[0]["Name"]
-fill_system_select();
-fill_star_selector();
-fill_planet_selector();
-fill_group_selector();
+
+for (let i = 0; i < system_name_field.length; i++) {
+  system_name_field[i].innerHTML = system_list[0]["Name"]
+}
+fill_selectors(SYSTEM);
+//fill_group_selector();
+//fill_star_selector();
+//fill_planet_selector();
 calc_time()

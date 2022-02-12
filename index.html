@@ -50,7 +50,7 @@
 
       <!-- Header -->
       <div id="header">
-        <div class="title">Current System: <span id="system-name"></span></div>
+        <div class="title"><span class="system-name"></span> - <span class="group-name"></span> - <span class="star-name"></span> - <span class="planet-name"></span> - <span class="moon-name"></span></div>
         <div id="object-select">
           <button class="object-button selected-button top-btn" id="stars">Stars</button>
           <button class="object-button top-btn" id="planets">Panets</button>
@@ -73,8 +73,7 @@
               <tr class="bottom-border">
                 <th><label for="star-selector">Star</label></th>
                 <th class="user-data" id="star-name">
-                  <select name="star-selector" class="star-selector">
-                  </select>
+                  <span class="star-name"></span>
                 </th>
               </tr>
               <tr>
@@ -140,8 +139,6 @@
               <tr class="bottom-border">
                 <th><label for="group-selector">Star Group</label></th>
                 <th class="user-data group-name" id="star-group-name">
-                <select name="group-selector" class="group-selector">
-                </select>
               </th>
               </tr>
             </table>
@@ -241,15 +238,13 @@
           </div>
           <table class="bottom-border">
             <tr>
-              <th><label for="star-selector">Star</label></th>
-              <th class="user-data star-name" id="planets-star-name">
-                <select name="star-selector" class="star-selector">
-                </select>
+              <th><label for="star-selector">Star Group</label></th>
+              <th class="user-data group-name" id="planets-star-name">
+                <span class="star-name"></span>
               </th>
               <th><label for="planet-selector">Planet</label></th>
               <th class="user-data planet-name" id="planet-name-">
-                <select name="planet-selector" class="planet-selector">
-                </select>
+                <span class="planet-name"></span>
               </th>
             </tr>
           </table>

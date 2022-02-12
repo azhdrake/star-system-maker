@@ -49,6 +49,13 @@ html, body{
   padding: 0.75em;
 }
 
+.full-length-flex{
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  flex-flow: flex-end;
+}
+
 #right-side{
   flex-grow: 10;
   background-color: rgb(155, 155, 155);
@@ -123,4 +130,39 @@ tr:hover {
 
 .hidden{
   display: none;
+}
+
+.indent{
+  width: 90%;
+  align-self: flex-end;
+}
+
+.sidebar-header{
+  color: rgb(250, 255, 185);
+  font-size: 1.15em;
+}
+
+#systems button{
+  background-color: #edc2c8;
+  border: none;
+}
+
+#div2-1 button{
+  background-color:#edd7c5;
+  border: none;
+}
+
+#div2-2 button{
+  background-color:#ede7c5;
+  border: none;
+}
+
+#div2-3 button{
+  background-color: #c2edcf;
+  border: none;
+}
+
+#div2-4 button{
+  background-color: #c8c8cb;
+  border: none;
 }
