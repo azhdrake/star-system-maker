@@ -51,7 +51,7 @@ let system_list = [
       "Min/Hr": 60,
       "Sec/Min": 60,
       "Moons" :[{
-        "ID": 1,
+        "ID": 0,
         "Name": "Moon 2"
       }]
     }]
@@ -102,7 +102,7 @@ let system_list = [
       "Min/Hr": 50,
       "Sec/Min": 50,
       "Moons" :[{
-        "ID": 1,
+        "ID": 0,
         "Name": "Moon 4"
       }]
     },{
@@ -119,8 +119,11 @@ let system_list = [
       "Min/Hr": 100,
       "Sec/Min": 100,
       "Moons" :[{
-        "ID": 1,
+        "ID": 0,
         "Name": "Moon 5"
+      },{
+        "ID": 1,
+        "Name": "Moon 6"
       }]
     }]
   }],

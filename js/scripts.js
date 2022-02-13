@@ -72,12 +72,7 @@ const help_tooltip = document.querySelector("#help-tooltip");
 
 page_dimmer.addEventListener("click", function(){ page_dimmer.classList.add("hidden"); });
 
-help_btns = document.querySelectorAll(".help-btn");
-for(let i = 0; i < help_btns.length; i++){
-  help_btns[i].addEventListener("click", function(){ get_help(help_btns[i].id)} );
-  help_btns[i].addEventListener("mouseenter", function(){ help_hover(event, help_btns[i].id)} );
-  help_btns[i].addEventListener("mouseleave", function(){ help_tooltip.classList.add("hidden");} );
-}
+
 
 function open_tab(tab_name, tab_group) {
   var tab = document.getElementsByClassName(tab_group);
@@ -127,7 +122,7 @@ function fill_selectors(type){
   for (let i = 0; i < section.length; i++){
     let child_div = document.createElement("div");
     child_div.classList.add("full-length-flex");
-    child_div.id = type + "-div-" + section[i]["ID"];
+    child_div.id = "div-" + type + "-" + section[i]["ID"];
 
     let btn = document.createElement("button");
     btn.innerHTML = section[i]["Name"];
@@ -141,7 +136,8 @@ function fill_selectors(type){
 
 function sidebar_select(selected_id, type){
   if(type == SYSTEM){ 
-    system_id = selected_id; 
+    system_id = selected_id;
+    add_select_border(SYSTEM)
     section = system_list[system_id];
     for (let i = 0; i < system_name_field.length; i++) {
       system_name_field[i].innerHTML = section["Name"];
@@ -149,6 +145,7 @@ function sidebar_select(selected_id, type){
     }
   } else if(type == GROUP){ 
     group_id = selected_id;
+    add_select_border(GROUP)
     section = system_list[system_id]["Star Groups"][group_id];
     for (let i = 0; i < group_name_field.length; i++) {
       group_name_field[i].innerHTML = section["Name"];
@@ -156,6 +153,7 @@ function sidebar_select(selected_id, type){
     } 
   } else if(type == STAR){ 
     star_id = selected_id; 
+    add_select_border(STAR)
     section = system_list[system_id]["Star Groups"][group_id]["Stars"][star_id];
     for (let i = 0; i < star_name_field.length; i++) {
       star_name_field[i].innerHTML = section["Name"];
@@ -163,6 +161,7 @@ function sidebar_select(selected_id, type){
     } 
   } else if(type == PLANET){
     planet_id = selected_id; 
+    add_select_border(PLANET)
     section = system_list[system_id]["Star Groups"][group_id]["Planets"][planet_id];
     for (let i = 0; i < planet_name_field.length; i++) {
       planet_name_field[i].innerHTML = section["Name"];
@@ -170,14 +169,14 @@ function sidebar_select(selected_id, type){
     } 
   } else if(type == MOON){ 
     moon_id = selected_id; 
+    add_select_border(MOON)
     section = system_list[system_id]["Star Groups"][group_id]["Planets"][planet_id]["Moons"][moon_id];
     for (let i = 0; i < moon_name_field.length; i++) {
       moon_name_field[i].innerHTML = section["Name"];
     } 
   }
 
-  let parent_div = document.getElementById(type + "-div-" + selected_id);
-
+  let parent_div = document.getElementById("div-" + type + "-" + selected_id);
 
   for(const grouping in section){
     if(Array.isArray(section[grouping])){
@@ -208,6 +207,36 @@ function sidebar_select(selected_id, type){
   load_time();
 }
 
+function add_select_border(type){
+  let body_id = 0;
+  if(type == SYSTEM){ 
+    body_id = system_id;
+    type_list = system_list; 
+  } if(type == GROUP){ 
+    body_id = group_id; 
+    type_list = system_list[system_id]["Star Groups"];
+  } if(type == STAR){ 
+    body_id = star_id; 
+    type_list = system_list[system_id]["Star Groups"][group_id]["Stars"]
+  } if(type == PLANET){ 
+    body_id = planet_id; 
+    type_list = system_list[system_id]["Star Groups"][group_id]["Planets"]
+  } if(type == MOON){ 
+    body_id = moon_id; 
+    type_list = system_list[system_id]["Star Groups"][group_id]["Planets"][planet_id]["Moons"]
+  }
+
+  for(body in type_list){
+    el = document.querySelector("#div-" + type + "-" + type_list[body]["ID"]);
+    btn = el.querySelector("button")
+    btn.classList.remove("black-border");
+  }
+
+  parent_div = document.querySelector("#div-" + type + "-" + body_id);
+  selected_btn = parent_div.querySelector('button');
+  selected_btn.classList.add("black-border");
+}
+
 function get_help(btn_id){
   for(btn_name in help){
     if(btn_name == btn_id){
@@ -228,6 +257,13 @@ function help_hover(event, btn_id){
 
     }
   }
+}
+
+help_btns = document.querySelectorAll(".help-btn");
+for(let i = 0; i < help_btns.length; i++){
+  help_btns[i].addEventListener("click", function(){ get_help(help_btns[i].id)} );
+  help_btns[i].addEventListener("mouseenter", function(){ help_hover(event, help_btns[i].id)} );
+  help_btns[i].addEventListener("mouseleave", function(){ help_tooltip.classList.add("hidden");} );
 }
 
 /***************\

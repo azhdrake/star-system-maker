@@ -143,27 +143,28 @@ tr:hover {
 }
 
 #systems button{
-  background-color: #edc2c8;
+  background-color: #776265;
   border: none;
+  color:white;
 }
 
 #div2-1 button{
-  background-color:#edd7c5;
+  background-color:#887971;
   border: none;
 }
 
 #div2-2 button{
-  background-color:#ede7c5;
+  background-color:#948f7c;
   border: none;
 }
 
 #div2-3 button{
-  background-color: #c2edcf;
+  background-color: #789682;
   border: none;
 }
 
 #div2-4 button{
-  background-color: #c8c8cb;
+  background-color: #555555;
   border: none;
 }
 
@@ -212,4 +213,10 @@ tr:hover {
   width: 10em;
   border:2px solid black;
   background-color: white;
+}
+
+.black-border{
+  border: 5px solid white !important;
+  background-color: rgba(255, 255, 255, 0.705)!important;
+  color: black !important;
 }
