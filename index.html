@@ -38,18 +38,27 @@
         System Select
       </span>
       <span class="sidebar-topper">
-        <button class="half-item" id="new-button">
+        <label for="new-button" id="new-button-label" class="half-item sidebar-btn-label">
           Create
-        </button>
-        <button class="half-item" id="help-button">
+          <button class="hidden" id="new-button"></button>
+          </button>
+        </label>
+        <label for="help-button" id="help-button-label" class="half-item sidebar-btn-label">
           HELP
-        </button>
+          <button class="hidden" id="help-button"> 
+          </button>
+        </label>
       </span>
       <span class="sidebar-topper">
-        <button class="half-item" id="save-button">
+        <label for="save-button" id="save-button-label" class="half-item sidebar-btn-label">
           Save Data
-        </button>
-        <input type="file" accept=".txt, .js, .json" name="Load Data" class="half-item" id="load-button">
+          <button class="hidden" id="save-button">
+          </button>
+        </label>
+        <label for="load-button" id="load-button-label" class="half-item sidebar-btn-label">
+          Load Data
+          <input type="file" accept=".txt, .js, .json" name="Load Data" class="hidden" id="load-button">
+        </label>
       </span>
       <span id="systems">
 
