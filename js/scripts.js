@@ -10,6 +10,8 @@ const MOON   = 4;
 
 let system_id = group_id = star_id = planet_id = 0;
 
+let system_list = []
+
 /***********************\
  * Tabs and Navigation *
 \***********************/
@@ -867,8 +869,8 @@ function clear_body_names(type){
 for (let i = 0; i < system_name_field.length; i++) {
   system_name_field[i].innerHTML = system_list[0]["Name"]
 }
-fill_selectors(SYSTEM);
+//fill_selectors(SYSTEM);
 //fill_group_selector();
 //fill_star_selector();
 //fill_planet_selector();
-calc_time()
+//calc_time()
