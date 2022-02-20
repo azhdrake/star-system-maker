@@ -51,6 +51,7 @@ const new_body_select = document.querySelector("#new-body-select");
 const new_group_menu = document.querySelector("#new-group-menu");
 const new_star_menu = document.querySelector("#new-star-menu");
 const new_planet_menu = document.querySelector("#new-planet-menu");
+const help_menu = document.querySelector("#help-menu");
 
 const create_new_system_btn = document.querySelector("#new-system");
 const create_new_group_btn = document.querySelector("#new-group");
@@ -103,6 +104,7 @@ shared_button.addEventListener("click", function(){ select_button(shared_button,
 create_button.addEventListener("click", function(){ create_object() } )
 save_button.addEventListener("click", function(){ download(JSON.stringify(system_list), "Star System Save Data.txt")} )
 load_button.addEventListener("input", function(){ upload(load_button.files[0])} )
+help_button.addEventListener("click", function(){ page_dimmer.classList.remove("hidden"); help_menu.classList.remove("hidden"); } )
 
 create_new_system_btn.addEventListener("click", function(){ 
   new_body_select.classList.add("hidden"); new_system_menu.classList.remove("hidden"); 
@@ -123,6 +125,7 @@ choose_planets_system_field.addEventListener("change", function(){ populate_grou
 page_dimmer.addEventListener("click", function(){
   hideOnClickOutside(page_dimmer)
 })
+
 
 function create_new_system(){
   let new_json = {};
@@ -307,6 +310,7 @@ function hide_the_chairs_we_cant_let_anyone_know_we_SIT(){
   new_group_menu.classList.add("hidden");
   new_star_menu.classList.add("hidden");
   new_planet_menu.classList.add("hidden");
+  help_menu.classList.add("hidden");
 }
 
 function create_object(){
@@ -625,25 +629,30 @@ function calc_time(){
   
   star_a_mass = star_b_mass = star_a_eccentrisity = star_b_eccentrisity = shared_separation_avg = star_a_lum = star_b_lum = 0;
 
-  if(group_id == 0 || group_id == 1){
-    star_a_mass = Number(system_list[system_id]["Star Groups"][group_id]["Stars"][0]["Mass"]);
-    star_b_mass = Number(system_list[system_id]["Star Groups"][group_id]["Stars"][1]["Mass"]);
-    star_a_eccentrisity = Number(system_list[system_id]["Star Groups"][group_id]["Stars"][0]["Eccentrisity"]);
-    star_b_eccentrisity = Number(system_list[system_id]["Star Groups"][group_id]["Stars"][1]["Eccentrisity"]);
-    shared_separation_avg = Number(system_list[system_id]["Star Groups"][group_id]["Average Separation"]);
+  if(system_list[system_id]["Star Groups"][group_id]["Stars"][1]){
+    if(group_id == 0 || group_id == 1){
+      star_a_mass = Number(system_list[system_id]["Star Groups"][group_id]["Stars"][0]["Mass"]);
+      star_b_mass = Number(system_list[system_id]["Star Groups"][group_id]["Stars"][1]["Mass"]);
+      star_a_eccentrisity = Number(system_list[system_id]["Star Groups"][group_id]["Stars"][0]["Eccentrisity"]);
+      star_b_eccentrisity = Number(system_list[system_id]["Star Groups"][group_id]["Stars"][1]["Eccentrisity"]);
+      shared_separation_avg = Number(system_list[system_id]["Star Groups"][group_id]["Average Separation"]);
+    } else {
+      for(let star in system_list[system_id]["Star Groups"][0]["Stars"]){
+        star_a_mass += star["Mass"];
+        star_a_lum =  Math.pow(star_a_mass, 3);
+      }
+      for(let star in system_list[system_id]["Star Groups"][1]["Stars"]){
+        star_b_mass += star["Mass"];
+        star_b_lum =  Math.pow(star_b_mass, 3);
+      }
+      star_a_eccentrisity = system_list[system_id]["Star Groups"][0]["Eccentrisity"]
+      star_b_eccentrisity = system_list[system_id]["Star Groups"][1]["Eccentrisity"]
+      shared_separation_avg = system_list[system_id]["Average Separation"];
+    }
   } else {
-    for(let star in system_list[system_id]["Star Groups"][0]["Stars"]){
-      star_a_mass += star["Mass"];
-      star_a_lum =  Math.pow(star_a_mass, 3);
-    }
-    for(let star in system_list[system_id]["Star Groups"][1]["Stars"]){
-      star_b_mass += star["Mass"];
-      star_b_lum =  Math.pow(star_b_mass, 3);
-    }
-    star_a_eccentrisity = system_list[system_id]["Star Groups"][0]["Eccentrisity"]
-    star_b_eccentrisity = system_list[system_id]["Star Groups"][1]["Eccentrisity"]
-    shared_separation_avg = system_list[system_id]["Average Separation"];
+    star_b_mass = star_b_lum = star_b_eccentrisity = 0;
   }
+
 
   barycenter_a = star_a_barycenter_field.innerHTML = shared_separation_avg* (star_b_mass / (Number(star_a_mass) + Number(star_b_mass)));
   barycenter_b = star_b_barycenter_field.innerHTML = shared_separation_avg - barycenter_a;
@@ -814,7 +823,9 @@ function load_time(body_type, e){
       if(system_list[system_id]["Star Groups"][i]["ID"] == group_id){
         shared_separation_avg_field.value = system_list[system_id]["Star Groups"][i]["Average Separation"];
         star_a_eccentrisity_field.value = system_list[system_id]["Star Groups"][i]["Stars"][0]["Eccentrisity"];
-        star_b_eccentrisity_field.value = system_list[system_id]["Star Groups"][i]["Stars"][1]["Eccentrisity"];
+        if(system_list[system_id]["Star Groups"][i]["Stars"][1]){
+          star_b_eccentrisity_field.value = system_list[system_id]["Star Groups"][i]["Stars"][1]["Eccentrisity"];
+        }
         for(let k = 0; k < system_list[system_id]["Star Groups"][i]["Stars"].length; k++){
           if(system_list[system_id]["Star Groups"][i]["Stars"][k]["ID"] == star_id){
             star_mass_field.value = system_list[system_id]["Star Groups"][i]["Stars"][k]["Mass"];

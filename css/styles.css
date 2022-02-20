@@ -298,3 +298,16 @@ tr:hover {
 .half-form{
   padding:1em;
 }
+
+#help-menu{
+  
+	text-align: left;
+  background-color: white;
+	position: absolute;
+	left: 50%;
+	width: 40em;
+  padding: 1em;   
+  margin-left: -20em; 
+	margin-top: 90px;
+	border: solid 0.15em black;
+}
