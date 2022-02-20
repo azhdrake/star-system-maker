@@ -147,7 +147,7 @@ tr:hover {
 }
 
 .hidden{
-  display: none;
+  display: none !important;
 }
 
 .indent{
@@ -236,4 +236,65 @@ tr:hover {
   border: 5px solid white !important;
   background-color: rgba(255, 255, 255, 0.87)!important;
   color: black !important;
+}
+
+#creation-menu{
+  text-align: center;
+  background-color: white;
+	position: absolute;
+	left: 30%;
+	width: 40em;
+  /* padding: 1em;   
+  margin-left: -20em;  */
+	margin-top: 90px;
+	border: solid 0.15em black;
+  padding: 0.75em;
+
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+}
+
+.new-body-group{
+  display: flex;
+  flex-direction: row;
+  align-content: stretch;
+  /* flex-grow: 1; */
+  width: 97%;
+  padding: 0 10px 0 10px;
+}
+
+.new-body-btn{
+  flex-grow: 1;
+  padding: 2em .75em;
+  width: 100%;  
+  background-color: #e9e9ed;
+  border-radius: 5px;
+  text-align: center;
+  margin: 0.1em;
+}
+
+.form-submit-btn{
+  flex-grow: 1;
+  padding: 1em .75em;
+  margin-top: 1em;
+  width: 100%;  
+  background-color: #e9e9ed;
+  border-radius: 5px;
+  text-align: center;
+} 
+
+.new-body-btn:hover, .form-submit-btn:hover{
+  background-color: #d0d0d7;
+}
+
+.new-object-form {
+  display: flex;
+  flex-direction: row;
+  align-content: stretch;
+  /* flex-grow: 1; */
+}
+
+.half-form{
+  padding:1em;
 }

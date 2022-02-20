@@ -22,13 +22,131 @@
 <body>
   <!-- help window -->
   <div id="dim-page" class="hidden">
-    <div id="help-window">
+    <div id="help-window" class="hidden">
       <span id="help-info"></span>
     </div>
-  </div>
 
+      <!-- Creation Menu -->
+      <div id="creation-menu" class="hidden">
+
+        <!-- System / Star / Planet / Moon -->
+        <div id="new-body-select">
+          <span class="new-body-group">
+            <label for="new-system" class="new-body-btn">
+              New System
+              <button id="new-system" class="hidden"></button>
+            </label>
+            <label for="new-group" class="new-body-btn">
+              New Group
+              <button id="new-group" class="hidden"></button>
+            </label>
+          </span>
+          <span class="new-body-group">
+            <label for="new-star" class="new-body-btn">
+              New Star
+              <button id="new-star" class="hidden"></button>
+            </label>
+            <label for="new-planet" class="new-body-btn">
+              New Planet
+              <button id="new-planet" class="hidden"></button>
+            </label>
+            <label for="new-moon" class="new-body-btn">
+              New Moon
+              <button id="new-moon" class="hidden"></button>
+            </label>
+          </span>
+        </div>
+      
+
+        <!-- New System Menu -->
+        <div id="new-system-menu" class="new-object-menu hidden">
+          <span class="new-object-form">
+            <span class="half-form">
+              <label for="new-system-name-field">New System Name:</label>
+              <input type="text" id="new-system-name-field">
+            </span>
+            <span class="half-form">
+              <label for="new-systems-group-name-field">New Group Name:</label>
+              <input type="text" id="new-systems-group-name-field">
+            </span>
+          </span>        
+          <span class="new-object-form">
+            <label for="new-system-submit-btn" class="form-submit-btn">Submit</label>
+            <button type="sumbit" id="new-system-submit-btn" class="hidden">
+          </span>
+        </div>
+
+        <!-- New Group Menu -->
+        <div id="new-group-menu" class="new-object-menu hidden">
+          <span class="new-object-form">
+            <span class="half-form">
+              <label for="choose-groups-system-field">System Name:</label>
+              <select id="choose-groups-system-field" class="create-menu-select"></select>
+            </span>
+            <span class="half-form">
+              <label for="new-group-name-field">New Group Name:</label>
+              <input type="text" id="new-group-name-field">
+            </span>
+          </span>        
+          <span class="new-object-form">
+            <label for="new-group-submit-btn" class="form-submit-btn">Submit</label>
+            <button type="sumbit" id="new-group-submit-btn" class="hidden">
+          </span>
+        </div>
+        
+        <!-- New Star Menu -->
+        <div id="new-star-menu" class="new-object-menu hidden">
+          <span class="new-object-form">
+            <span class="half-form">
+              <label for="choose-stars-system-field">System Name:</label>
+              <select id="choose-stars-system-field" class="create-menu-select"></select>
+            </span>
+            <span class="half-form">
+              <label for="choose-stars-group-field">Group Name:</label>
+              <select id="choose-stars-group-field" class="create-menu-select"></select>
+            </span>
+            <span class="half-form">
+              <label for="new-star-name-field">New Star Name:</label>
+              <input type="text" id="new-star-name-field">
+            </span>
+          </span>        
+          <span class="new-object-form">
+            <label for="new-star-submit-btn" class="form-submit-btn">Submit</label>
+            <button type="sumbit" id="new-star-submit-btn" class="hidden">
+          </span>
+        </div>
+
+        <!-- New Planet Menu -->
+        <div id="new-planet-menu" class="new-object-menu hidden">
+          <span class="new-object-form">
+            <span class="half-form">
+              <label for="choose-planets-system-field">System Name:</label>
+              <select id="choose-planets-system-field" class="create-menu-select"></select>
+            </span>
+            <span class="half-form">
+              <label for="choose-planets-group-field">Group Name:</label>
+              <select id="choose-planets-group-field" class="create-menu-select"></select>
+            </span>
+            <span class="half-form">
+              <label for="new-planet-name-field">New Planet Name:</label>
+              <input type="text" id="new-planet-name-field">
+            </span>
+          </span>        
+          <span class="new-object-form">
+            <label for="new-planet-submit-btn" class="form-submit-btn">Submit</label>
+            <button type="sumbit" id="new-planet-submit-btn" class="hidden">
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </div>
   <!-- help tooltip -->
   <div id="help-tooltip" class="hidden"></div>
+
+
+
+    
 
   <!-- Sidebar -->
   <div id="flex-content">

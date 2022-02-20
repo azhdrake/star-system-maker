@@ -14,6 +14,11 @@ let system_id = group_id = star_id = planet_id = 0;
  * Tabs and Navigation *
 \***********************/
 
+const create_button = document.querySelector("#new-button");
+const help_button = document.querySelector("#help-button");
+const save_button = document.querySelector("#save-button");
+const load_button = document.querySelector("#load-button");
+
 const stars_button = document.querySelector("#stars");
 const planets_button = document.querySelector("#planets");
 const moons_button = document.querySelector("#moons");
@@ -30,14 +35,46 @@ const star_selector = document.querySelectorAll(".star-selector");
 const planet_selector = document.querySelectorAll(".planet-selector");
 const group_selector = document.querySelectorAll(".group-selector");
 
-const save_button = document.querySelector("#save-button");
-const load_button = document.querySelector("#load-button");
-
 const system_name_field = document.querySelectorAll(".system-name");
 const group_name_field = document.querySelectorAll(".group-name");
 const star_name_field = document.querySelectorAll(".star-name");
 const planet_name_field = document.querySelectorAll(".planet-name");
 const moon_name_field = document.querySelectorAll(".moon-name");
+
+const page_dimmer = document.querySelector("#dim-page");
+const help_window = document.querySelector("#help-window");
+const help_info = document.querySelector("#help-info");
+const help_tooltip = document.querySelector("#help-tooltip");
+const creation_menu = document.querySelector("#creation-menu");
+const new_system_menu = document.querySelector("#new-system-menu");
+const new_body_select = document.querySelector("#new-body-select");
+const new_group_menu = document.querySelector("#new-group-menu");
+const new_star_menu = document.querySelector("#new-star-menu");
+const new_planet_menu = document.querySelector("#new-planet-menu");
+
+const create_new_system_btn = document.querySelector("#new-system");
+const create_new_group_btn = document.querySelector("#new-group");
+const create_new_star_btn = document.querySelector("#new-star");
+const create_new_planet_btn = document.querySelector("#new-planet");
+const create_new_moon_btn = document.querySelector("#new-moon");
+
+const new_system_submit_btn = document.querySelector("#new-system-submit-btn");
+const new_system_name_field = document.querySelector("#new-system-name-field");
+const new_systems_group_name_field = document.querySelector("#new-systems-group-name-field");
+
+const new_group_submit_btn = document.querySelector("#new-group-submit-btn");
+const choose_group_system_field = document.querySelector("#choose-groups-system-field")
+const new_group_name_field = document.querySelector("#new-group-name-field")
+
+const new_star_submit_btn = document.querySelector("#new-star-submit-btn");
+const choose_stars_system_field = document.querySelector("#choose-stars-system-field")
+const choose_stars_group_field = document.querySelector("#choose-stars-group-field")
+const new_star_name_field = document.querySelector("#new-star-name-field")
+
+const new_planet_submit_btn = document.querySelector("#new-planet-submit-btn");
+const choose_planets_system_field = document.querySelector("#choose-planets-system-field")
+const choose_planets_group_field = document.querySelector("#choose-planets-group-field")
+const new_planet_name_field = document.querySelector("#new-planet-name-field")
 
 stars_button.addEventListener("click", function(){ open_tab("stars-content", "tab")} );
 planets_button.addEventListener("click", function(){ open_tab("planets-content", "tab")});
@@ -63,16 +100,220 @@ individual_button.addEventListener("click", function(){ select_button(individual
 group_button.addEventListener("click", function(){ select_button(group_button, "star-btn")} );
 shared_button.addEventListener("click", function(){ select_button(shared_button, "star-btn")} );
 
+create_button.addEventListener("click", function(){ create_object() } )
 save_button.addEventListener("click", function(){ download(JSON.stringify(system_list), "Star System Save Data.txt")} )
 load_button.addEventListener("input", function(){ upload(load_button.files[0])} )
 
-const page_dimmer = document.querySelector("#dim-page");
-const help_window = document.querySelector("#help-info");
-const help_tooltip = document.querySelector("#help-tooltip");
+create_new_system_btn.addEventListener("click", function(){ 
+  new_body_select.classList.add("hidden"); new_system_menu.classList.remove("hidden"); 
+})
+new_system_submit_btn.addEventListener("click", function(){create_new_system();})
 
-page_dimmer.addEventListener("click", function(){ page_dimmer.classList.add("hidden"); });
+create_new_group_btn.addEventListener("click", function(){ ready_group_menu()})
+new_group_submit_btn.addEventListener("click", function(){create_new_group();})
 
+create_new_star_btn.addEventListener("click", function(){ ready_star_menu(); })
+new_star_submit_btn.addEventListener("click", function(){ create_new_star(); })
+choose_stars_system_field.addEventListener("change", function(){ populate_group_dropdown(choose_stars_group_field, choose_stars_system_field); })
 
+create_new_planet_btn.addEventListener("click", function(){ ready_planet_menu(); })
+new_planet_submit_btn.addEventListener("click", function(){ create_new_planet(); })
+choose_planets_system_field.addEventListener("change", function(){ populate_group_dropdown(choose_planets_group_field, choose_planets_system_field); })
+
+page_dimmer.addEventListener("click", function(){
+  hideOnClickOutside(page_dimmer)
+})
+
+function create_new_system(){
+  let new_json = {};
+  let new_system_id = system_list.length;
+
+  let new_system_name = new_system_name_field.value;
+  let new_group_name = new_systems_group_name_field.value;
+
+  new_json = {
+    "ID": new_system_id,
+    "Name": new_system_name,
+    "Average Separation": 400,
+    "Star Groups": [{
+      "ID": 0,
+      "Name": new_group_name,
+      "Average Separation": 0,
+      "Eccentrisity": 0,
+      "Stars" : [], 
+      "Planets": []
+      }]
+  }
+
+  system_list.push(new_json);
+  fill_selectors(SYSTEM)
+  hide_the_chairs_we_cant_let_anyone_know_we_SIT();
+}
+
+function ready_group_menu(){
+  new_body_select.classList.add("hidden"); 
+  new_group_menu.classList.remove("hidden");
+  choose_group_system_field.innerHTML = "";
+  for(let i = 0; i < system_list.length; i++){
+    el = document.createElement("option");
+    el.value = system_list[i]["ID"];
+    el.innerHTML = system_list[i]["Name"];
+    choose_group_system_field.appendChild(el)
+  }
+}
+
+function create_new_group(){
+  let new_json = {};
+  let system_id = choose_group_system_field.value;
+  let new_group_id = system_list[system_id]["Star Groups"].length;
+
+  if(new_group_id > 1){
+    alert(system_list[system_id]["name"] + " already has two star groups. You cannot exceed two star groups in a system.")
+    return;
+  }
+
+   let new_group_name = new_group_name_field.value;
+
+  new_json = {
+    "ID": new_group_id,
+    "Name": new_group_name,
+    "Average Separation": 0,
+    "Eccentrisity": 0,
+    "Stars" : [], 
+    "Planets": []
+  }
+
+  system_list[system_id]["Star Groups"].push(new_json);
+  hide_the_chairs_we_cant_let_anyone_know_we_SIT();
+}
+
+function populate_group_dropdown(dropdown, sys){
+  dropdown.innerHTML = "";
+  sys_id = sys.value;
+  for(let i = 0; i < system_list[sys_id]["Star Groups"].length; i++){
+    el = document.createElement("option");
+    el.value = system_list[sys_id]["Star Groups"][i]["ID"];
+    el.innerHTML = system_list[sys_id]["Star Groups"][i]["Name"];
+    dropdown.appendChild(el)
+  }
+}
+
+function ready_star_menu(){
+  new_body_select.classList.add("hidden"); 
+  new_star_menu.classList.remove("hidden");
+  choose_stars_system_field.innerHTML = "";
+
+  for(let i = 0; i < system_list.length; i++){
+    el = document.createElement("option");
+    el.value = system_list[i]["ID"];
+    el.innerHTML = system_list[i]["Name"];
+    choose_stars_system_field.appendChild(el)
+  }
+  populate_group_dropdown(choose_stars_group_field, choose_stars_system_field)
+}
+
+function create_new_star(){
+  let new_json = {};
+  let sys_id = choose_stars_system_field.value;
+  let grp_id = choose_stars_group_field.value;
+  let new_star_id = system_list[sys_id]["Star Groups"][grp_id]["Stars"].length;
+
+  if(new_star_id > 1){
+    alert(system_list[sys_id]["Star Groups"][grp_id]["Name"] + " already has two stars. You cannot exceed two star groups in a system.")
+    return;
+  }
+
+  let new_star_name = new_star_name_field.value;
+
+  new_json = {
+    "ID": new_star_id,
+    "Name": new_star_name,
+    "Mass": 0,
+    "Eccentrisity": 0
+  }
+
+  system_list[sys_id]["Star Groups"][grp_id]["Stars"].push(new_json);
+  hide_the_chairs_we_cant_let_anyone_know_we_SIT();
+}
+
+function ready_planet_menu(){
+  new_body_select.classList.add("hidden"); 
+  new_planet_menu.classList.remove("hidden");
+  choose_planets_system_field.innerHTML = "";
+
+  for(let i = 0; i < system_list.length; i++){
+    el = document.createElement("option");
+    el.value = system_list[i]["ID"];
+    el.innerHTML = system_list[i]["Name"];
+    choose_planets_system_field.appendChild(el)
+  }
+  populate_group_dropdown(choose_planets_group_field, choose_planets_system_field)
+}
+
+function create_new_planet(){
+  let new_json = {};
+  let sys_id = choose_planets_system_field.value;
+  let grp_id = choose_planets_group_field.value;
+  let new_planet_id = system_list[sys_id]["Star Groups"][grp_id]["Planets"].length;
+
+  let new_planet_name = new_planet_name_field.value;
+
+  new_json = {
+    "ID": new_planet_id,
+    "Name": new_planet_name,
+    "Mass": 0,
+    "Radius": 0,
+    "Eccentricity": 0,
+    "Semi-Major Axis": 0,
+    "Axial Tilt": 0,
+    "Day Length": 0,
+    "Months/Year": 0,
+    "Hour/Day": 0,
+    "Min/Hr": 0,
+    "Sec/Min": 0,
+    "Moons" :[]
+  }
+
+  system_list[sys_id]["Star Groups"][grp_id]["Planets"].push(new_json);
+  hide_the_chairs_we_cant_let_anyone_know_we_SIT();
+}
+
+function hideOnClickOutside(parent_el) {
+  child_el = parent_el.children;
+  for(let i = 0; i < child_el.length; i++){
+    if( !child_el[i].classList.contains("hidden")){
+      const outsideClickListener = event => {
+        if (!child_el[i].contains(event.target) && !child_el[i].classList.contains("hidden")) {
+          hide_the_chairs_we_cant_let_anyone_know_we_SIT();
+          removeClickListener()
+        }
+    }
+  
+    const removeClickListener = () => {
+        document.removeEventListener('click', outsideClickListener)
+    }
+  
+    document.addEventListener('click', outsideClickListener)
+    }
+  }
+}
+
+function hide_the_chairs_we_cant_let_anyone_know_we_SIT(){
+  page_dimmer.classList.add("hidden");
+  help_window.classList.add("hidden");
+  creation_menu.classList.add("hidden");
+  new_system_menu.classList.add("hidden");
+  new_body_select.classList.add("hidden");
+  new_group_menu.classList.add("hidden");
+  new_star_menu.classList.add("hidden");
+  new_planet_menu.classList.add("hidden");
+}
+
+function create_object(){
+  page_dimmer.classList.remove("hidden");
+  creation_menu.classList.remove("hidden");
+  new_body_select.classList.remove("hidden");
+}
 
 function open_tab(tab_name, tab_group) {
   var tab = document.getElementsByClassName(tab_group);
@@ -241,7 +482,8 @@ function get_help(btn_id){
   for(btn_name in help){
     if(btn_name == btn_id){
       page_dimmer.classList.remove("hidden");
-      help_window.innerHTML = help[btn_name];
+      help_window.classList.remove("hidden");
+      help_info.innerHTML = help[btn_name];
     }
   }
 }
