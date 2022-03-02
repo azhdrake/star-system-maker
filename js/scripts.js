@@ -10,7 +10,7 @@ const MOON   = 4;
 
 let system_id = group_id = star_id = planet_id = 0;
 
-let system_list = []
+let system_list = [];
 
 /***********************\
  * Tabs and Navigation *
@@ -161,7 +161,7 @@ function ready_group_menu(){
   choose_group_system_field.innerHTML = "";
   for(let i = 0; i < system_list.length; i++){
     el = document.createElement("option");
-    el.value = system_list[i]["ID"];
+    el.value = i;
     el.innerHTML = system_list[i]["Name"];
     choose_group_system_field.appendChild(el)
   }
@@ -197,7 +197,7 @@ function populate_group_dropdown(dropdown, sys){
   sys_id = sys.value;
   for(let i = 0; i < system_list[sys_id]["Star Groups"].length; i++){
     el = document.createElement("option");
-    el.value = system_list[sys_id]["Star Groups"][i]["ID"];
+    el.value = i;
     el.innerHTML = system_list[sys_id]["Star Groups"][i]["Name"];
     dropdown.appendChild(el)
   }
@@ -210,7 +210,7 @@ function ready_star_menu(){
 
   for(let i = 0; i < system_list.length; i++){
     el = document.createElement("option");
-    el.value = system_list[i]["ID"];
+    el.value = i;
     el.innerHTML = system_list[i]["Name"];
     choose_stars_system_field.appendChild(el)
   }
@@ -248,7 +248,7 @@ function ready_planet_menu(){
 
   for(let i = 0; i < system_list.length; i++){
     el = document.createElement("option");
-    el.value = system_list[i]["ID"];
+    el.value = i;
     el.innerHTML = system_list[i]["Name"];
     choose_planets_system_field.appendChild(el)
   }
@@ -369,13 +369,18 @@ function fill_selectors(type){
   for (let i = 0; i < section.length; i++){
     let child_div = document.createElement("div");
     child_div.classList.add("full-length-flex");
-    child_div.id = "div-" + type + "-" + section[i]["ID"];
+    child_div.id = "div-" + type + "-" + i;
 
-    let btn = document.createElement("button");
-    btn.innerHTML = section[i]["Name"];
+    let btn = document.createElement("table");
+    btn.innerHTML = '<tr class="sidebar-btn"><td class="sidebar-btn-main">' + section[i]["Name"] + '<td><button class="delete-btn-td" id="'+ type +'-'+ i +'" class="delete-btn"> X </button></td></tr>';
     btn.classList.add("sidebar-item");
 
-    btn.addEventListener( "click", function(){ sidebar_select(i, type);} );
+    main_btn = btn.querySelector(".sidebar-btn-main");
+    main_btn.addEventListener( "click", function(){ sidebar_select(i, type);} );
+
+    delete_btn = btn.querySelector(".delete-btn-td");
+    delete_btn.addEventListener( "click", function(){ delete_select(i, type);} );
+
     parent_div.appendChild(child_div);
     child_div.appendChild(btn);
   }
@@ -442,7 +447,6 @@ function sidebar_select(selected_id, type){
         new_child_div.id  = "div2-" + (type + additive);
         new_child_div.classList.add("indent");
         new_child_div.classList.add("full-length-flex");
-        new_child_div.classList.add("sidebar-header")
 
         parent_div.appendChild(new_child_div);
       }
@@ -452,6 +456,21 @@ function sidebar_select(selected_id, type){
   if(type != STAR){ fill_selectors(type+1);}
 
   load_time();
+}
+
+function delete_select(selected_id, type){
+  if(type == SYSTEM && confirm('Are you sure you want to delete system' + system_list[selected_id]["Name"] + '?')){ 
+    system_list.splice(selected_id, 1);
+  } else if(type == GROUP && confirm('Are you sure you want to delete star group' + system_list[system_id]["Star Groups"][selected_id]["Name"] + '?')){ 
+    system_list[system_id]["Star Groups"].splice(selected_id, 1);
+  } else if(type == STAR && confirm('Are you sure you want to delete star' + system_list[system_id]["Star Groups"][group_id]["Stars"][selected_id]["Name"] + '?')){ 
+    system_list[system_id]["Star Groups"][group_id]["Stars"].splice(selected_id, 1);
+  } else if(type == PLANET && confirm('Are you sure you want to delete planet' + system_list[system_id]["Star Groups"][group_id]["Planets"][selected_id]["Name"] + '?')){
+    section = system_list[system_id]["Star Groups"][group_id]["Planets"].splice(selected_id, 1);
+  } else if(type == MOON && confirm('Are you sure you want to delete star' + system_list[system_id]["Star Groups"][group_id]["Planets"][planet_id]["Moons"][selected_id]["Name"] + '?')){ 
+    section = system_list[system_id]["Star Groups"][group_id]["Planets"][planet_id]["Moons"].splice(selected_id, 1);
+  }
+  fill_selectors(type)
 }
 
 function add_select_border(type){
@@ -473,14 +492,14 @@ function add_select_border(type){
     type_list = system_list[system_id]["Star Groups"][group_id]["Planets"][planet_id]["Moons"]
   }
 
-  for(body in type_list){
-    el = document.querySelector("#div-" + type + "-" + type_list[body]["ID"]);
-    btn = el.querySelector("button")
+  for(i=0; i<type_list.length; i++){
+    el = document.querySelector("#div-" + type + "-" + i);
+    btn = el.querySelector("table")
     btn.classList.remove("black-border");
   }
 
   parent_div = document.querySelector("#div-" + type + "-" + body_id);
-  selected_btn = parent_div.querySelector('button');
+  selected_btn = parent_div.querySelector('table');
   selected_btn.classList.add("black-border");
 }
 
@@ -734,19 +753,19 @@ function save_time(){
     system_list[system_id]["Star Groups"][1]["Eccentrisity"] = star_b_eccentrisity_field.value;
   } else {
     for(let i = 0; i < system_list[system_id]["Star Groups"].length; i++){
-      if(system_list[system_id]["Star Groups"][i]["ID"] == group_id){
+      if(i == group_id){
         system_list[system_id]["Star Groups"][i]["Average Separation"] = shared_separation_avg_field.value;
         for(let k = 0; k < system_list[system_id]["Star Groups"][i]["Stars"].length; k++){
-          if(system_list[system_id]["Star Groups"][i]["Stars"][k]["ID"] == 0){
+          if(k == 0){
             system_list[system_id]["Star Groups"][i]["Stars"][k]["Eccentrisity"] = star_a_eccentrisity_field.value;
           }
-          else if(system_list[system_id]["Star Groups"][i]["Stars"][k]["ID"] == 1){
+          else if(k == 1){
             system_list[system_id]["Star Groups"][i]["Stars"][k]["Eccentrisity"] = star_b_eccentrisity_field.value;
           }
-          if(system_list[system_id]["Star Groups"][i]["Stars"][k]["ID"] == star_id){
+          if(k == star_id){
             system_list[system_id]["Star Groups"][i]["Stars"][k]["Mass"] = star_mass_field.value;
             for(let j = 0; j < system_list[system_id]["Star Groups"][i]["Planets"].length; j++){
-              if(system_list[system_id]["Star Groups"][i]["Planets"][j]["ID"] == planet_id){
+              if(j == planet_id){
                 system_list[system_id]["Star Groups"][i]["Planets"][j]["Mass"] = planet_mass_field.value;
                 system_list[system_id]["Star Groups"][i]["Planets"][j]["Radius"] = planet_radius_field.value;
                 system_list[system_id]["Star Groups"][i]["Planets"][j]["Eccentricity"] = planet_eccentricity_field.value;
@@ -822,17 +841,17 @@ function load_time(body_type, e){
     shared_separation_avg_field.value = system_list[system_id]["Average Separation"];
   } else {
     for (let i = 0; i < system_list[system_id]["Star Groups"].length; i++){
-      if(system_list[system_id]["Star Groups"][i]["ID"] == group_id){
+      if(i == group_id){
         shared_separation_avg_field.value = system_list[system_id]["Star Groups"][i]["Average Separation"];
         star_a_eccentrisity_field.value = system_list[system_id]["Star Groups"][i]["Stars"][0]["Eccentrisity"];
         if(system_list[system_id]["Star Groups"][i]["Stars"][1]){
           star_b_eccentrisity_field.value = system_list[system_id]["Star Groups"][i]["Stars"][1]["Eccentrisity"];
         }
         for(let k = 0; k < system_list[system_id]["Star Groups"][i]["Stars"].length; k++){
-          if(system_list[system_id]["Star Groups"][i]["Stars"][k]["ID"] == star_id){
+          if(k == star_id){
             star_mass_field.value = system_list[system_id]["Star Groups"][i]["Stars"][k]["Mass"];
             for(let j =0; j < system_list[system_id]["Star Groups"][i]["Planets"].length; j++){
-              if(system_list[system_id]["Star Groups"][i]["Planets"][j]["ID"] == planet_id){
+              if(j == planet_id){
                 planet_mass_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Mass"];
                 planet_radius_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Radius"];
                 planet_eccentricity_field.value = system_list[system_id]["Star Groups"][i]["Planets"][j]["Eccentricity"];
@@ -866,9 +885,9 @@ function clear_body_names(type){
  * MISC *
 \********/ 
 
-for (let i = 0; i < system_name_field.length; i++) {
-  system_name_field[i].innerHTML = system_list[0]["Name"]
-}
+// for (let i = 0; i < system_name_field.length; i++) {
+//   system_name_field[i].innerHTML = system_list[0]["Name"]
+// }
 //fill_selectors(SYSTEM);
 //fill_group_selector();
 //fill_star_selector();

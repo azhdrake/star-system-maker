@@ -52,7 +52,30 @@ html, body{
 }
 
 .sidebar-item{
+ 
   padding: 0.75em;
+}
+
+.sidebar-btn{
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  padding: .5em;
+}
+
+.sidebar-btn-main{
+  flex-grow: 10;
+  text-align: center;
+}
+
+.delete-btn-td{
+  flex-grow: 1;
+  background-color: red;
+  border-radius: 50%;
+  padding: 0.15em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border: 0;
 }
 
 .full-length-flex{
@@ -156,31 +179,30 @@ tr:hover {
 }
 
 .sidebar-header{
-  color: rgb(250, 255, 185);
-  font-size: 1.15em;
+  text-align: center;
 }
 
-#systems button{
+#systems table{
   background-color: #edc2c8;
   border: none;
 }
 
-#div2-1 button{
+#div2-1 table{
   background-color:#edd7c5;
   border: none;
 }
 
-#div2-2 button{
+#div2-2 table{
   background-color:#ede7c5;
   border: none;
 }
 
-#div2-3 button{
+#div2-3 table{
   background-color: #c2edcf;
   border: none;
 }
 
-#div2-4 button{
+#div2-4 table{
   background-color: #c8c8cb;
   border: none;
 }
