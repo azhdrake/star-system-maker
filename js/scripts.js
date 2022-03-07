@@ -432,24 +432,21 @@ function sidebar_select(selected_id, type){
 
   for(const grouping in section){
     if(Array.isArray(section[grouping])){
-      for(let i=0;i<section[grouping].length;i++){
-        
-        let additive = 1;
-        if(grouping == "Planets"){ additive = 2; }
+      let additive = 1;
+      if(grouping == "Planets"){ additive = 2; }
 
-        let child_div = document.getElementById("div2-" + (type + additive));
+      let child_div = document.getElementById("div2-" + (type + additive));
 
-        if(child_div){
-          child_div.parentNode.removeChild(child_div);
-        }
-
-        let new_child_div = document.createElement("div");
-        new_child_div.id  = "div2-" + (type + additive);
-        new_child_div.classList.add("indent");
-        new_child_div.classList.add("full-length-flex");
-
-        parent_div.appendChild(new_child_div);
+      if(child_div){
+        child_div.parentNode.removeChild(child_div);
       }
+
+      let new_child_div = document.createElement("div");
+      new_child_div.id  = "div2-" + (type + additive);
+      new_child_div.classList.add("indent");
+      new_child_div.classList.add("full-length-flex");
+
+      parent_div.appendChild(new_child_div);
     }
   }
   if(type == GROUP){fill_selectors(type+2);}
@@ -459,18 +456,23 @@ function sidebar_select(selected_id, type){
 }
 
 function delete_select(selected_id, type){
-  if(type == SYSTEM && confirm('Are you sure you want to delete system' + system_list[selected_id]["Name"] + '?')){ 
+  if(type == SYSTEM && confirm('Are you sure you want to delete system ' + system_list[selected_id]["Name"] + '?')){ 
     system_list.splice(selected_id, 1);
-  } else if(type == GROUP && confirm('Are you sure you want to delete star group' + system_list[system_id]["Star Groups"][selected_id]["Name"] + '?')){ 
+    fill_selectors(type)
+  } else if(type == GROUP && confirm('Are you sure you want to delete star group ' + system_list[system_id]["Star Groups"][selected_id]["Name"] + '?')){ 
     system_list[system_id]["Star Groups"].splice(selected_id, 1);
-  } else if(type == STAR && confirm('Are you sure you want to delete star' + system_list[system_id]["Star Groups"][group_id]["Stars"][selected_id]["Name"] + '?')){ 
+    sidebar_select(system_id, type-1)
+  } else if(type == STAR && confirm('Are you sure you want to delete star ' + system_list[system_id]["Star Groups"][group_id]["Stars"][selected_id]["Name"] + '?')){ 
     system_list[system_id]["Star Groups"][group_id]["Stars"].splice(selected_id, 1);
-  } else if(type == PLANET && confirm('Are you sure you want to delete planet' + system_list[system_id]["Star Groups"][group_id]["Planets"][selected_id]["Name"] + '?')){
+    sidebar_select(group_id, type-1)
+  } else if(type == PLANET && confirm('Are you sure you want to delete planet ' + system_list[system_id]["Star Groups"][group_id]["Planets"][selected_id]["Name"] + '?')){
     section = system_list[system_id]["Star Groups"][group_id]["Planets"].splice(selected_id, 1);
-  } else if(type == MOON && confirm('Are you sure you want to delete star' + system_list[system_id]["Star Groups"][group_id]["Planets"][planet_id]["Moons"][selected_id]["Name"] + '?')){ 
+    sidebar_select(group_id, type-2)
+  } else if(type == MOON && confirm('Are you sure you want to delete moon ' + system_list[system_id]["Star Groups"][group_id]["Planets"][planet_id]["Moons"][selected_id]["Name"] + '?')){ 
     section = system_list[system_id]["Star Groups"][group_id]["Planets"][planet_id]["Moons"].splice(selected_id, 1);
+    sidebar_select(planet_id, type-1)
   }
-  fill_selectors(type)
+  
 }
 
 function add_select_border(type){
