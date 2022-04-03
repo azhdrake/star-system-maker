@@ -30,6 +30,7 @@ html, body{
 
 #systems{
   width: 100%;
+  overflow: auto;
 }
 
 #sidebar .title{

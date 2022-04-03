@@ -64,10 +64,12 @@ const create_new_moon_btn = document.querySelector("#new-moon");
 const new_system_submit_btn = document.querySelector("#new-system-submit-btn");
 const new_system_name_field = document.querySelector("#new-system-name-field");
 const new_systems_group_name_field = document.querySelector("#new-systems-group-name-field");
+const new_systems_star_name_field = document.querySelector("#new-systems-star-name-field");
 
 const new_group_submit_btn = document.querySelector("#new-group-submit-btn");
 const choose_group_system_field = document.querySelector("#choose-groups-system-field")
 const new_group_name_field = document.querySelector("#new-group-name-field")
+const new_group_star_name_field = document.querySelector("#new-group-star-name-field")
 
 const new_star_submit_btn = document.querySelector("#new-star-submit-btn");
 const choose_stars_system_field = document.querySelector("#choose-stars-system-field")
@@ -135,17 +137,23 @@ function create_new_system(){
 
   let new_system_name = new_system_name_field.value;
   let new_group_name = new_systems_group_name_field.value;
+  let new_star_name = new_systems_star_name_field.value;
 
   new_json = {
     "ID": new_system_id,
     "Name": new_system_name,
-    "Average Separation": 400,
+    "Average Separation": 0,
     "Star Groups": [{
-      "ID": 0,
       "Name": new_group_name,
       "Average Separation": 0,
       "Eccentrisity": 0,
-      "Stars" : [], 
+      "Stars" : [
+        {
+          "Name": new_star_name,
+          "Mass": 0,
+          "Eccentrisity": 0
+        }
+      ], 
       "Planets": []
       }]
   }
@@ -178,13 +186,18 @@ function create_new_group(){
   }
 
    let new_group_name = new_group_name_field.value;
+   let new_star_name = new_group_star_name_field.value;
 
   new_json = {
     "ID": new_group_id,
     "Name": new_group_name,
     "Average Separation": 0,
     "Eccentrisity": 0,
-    "Stars" : [], 
+    "Stars" : [{
+        "Name": new_star_name,
+        "Mass": 0,
+        "Eccentrisity": 0
+      }], 
     "Planets": []
   }
 
