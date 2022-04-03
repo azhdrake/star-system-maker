@@ -566,6 +566,8 @@ const star_habitable_inner_field = document.querySelector("#star-habitable-inner
 const star_habitable_outer_field = document.querySelector("#star-habitable-outer");
 const star_frost_field = document.querySelector("#star-frost");
 
+const star_a_name_field = document.querySelector("#group-star-a");
+const star_b_name_field = document.querySelector("#group-star-b");
 const star_a_eccentrisity_field = document.querySelector("#star-a-eccentrisity");
 const star_b_eccentrisity_field = document.querySelector("#star-b-eccentrisity");
 const star_a_semimajor_field = document.querySelector("#star-a-semimajor");
@@ -664,6 +666,7 @@ function calc_time(){
   star_frost_field.innerHTML = Math.sqrt(star_mass)*4.85;
   
   star_a_mass = star_b_mass = star_a_eccentrisity = star_b_eccentrisity = shared_separation_avg = star_a_lum = star_b_lum = 0;
+  star_a_name = star_b_name = "";
 
   if(system_list[system_id]["Star Groups"][group_id]["Stars"][1]){
     if(group_id == 0 || group_id == 1){
@@ -672,14 +675,18 @@ function calc_time(){
       star_a_eccentrisity = Number(system_list[system_id]["Star Groups"][group_id]["Stars"][0]["Eccentrisity"]);
       star_b_eccentrisity = Number(system_list[system_id]["Star Groups"][group_id]["Stars"][1]["Eccentrisity"]);
       shared_separation_avg = Number(system_list[system_id]["Star Groups"][group_id]["Average Separation"]);
+      star_a_name = system_list[system_id]["Star Groups"][group_id]["Stars"][0]["Name"];
+      star_b_name = system_list[system_id]["Star Groups"][group_id]["Stars"][1]["Name"];
     } else {
       for(let star in system_list[system_id]["Star Groups"][0]["Stars"]){
         star_a_mass += star["Mass"];
         star_a_lum =  Math.pow(star_a_mass, 3);
+        star_a_name = star["Name"];
       }
       for(let star in system_list[system_id]["Star Groups"][1]["Stars"]){
         star_b_mass += star["Mass"];
         star_b_lum =  Math.pow(star_b_mass, 3);
+        star_b_name = star["Name"];
       }
       star_a_eccentrisity = system_list[system_id]["Star Groups"][0]["Eccentrisity"]
       star_b_eccentrisity = system_list[system_id]["Star Groups"][1]["Eccentrisity"]
@@ -689,7 +696,8 @@ function calc_time(){
     star_b_mass = star_b_lum = star_b_eccentrisity = 0;
   }
 
-
+  star_a_name_field.innerHTML = star_a_name
+  star_b_name_field.innerHTML = star_b_name
   barycenter_a = star_a_barycenter_field.innerHTML = shared_separation_avg* (star_b_mass / (Number(star_a_mass) + Number(star_b_mass)));
   barycenter_b = star_b_barycenter_field.innerHTML = shared_separation_avg - barycenter_a;
   bary_max_a = star_a_barycenter_max_field.innerHTML = (1 + star_a_eccentrisity) * barycenter_a;
