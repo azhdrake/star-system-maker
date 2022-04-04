@@ -804,7 +804,7 @@ function calc_time(){
     num_stars = system_list[system_id]["Star Groups"][0]["Stars"].length;
   }
   
-  system_image_span.innerHTML = '<img src="images/'+system_img_src+'" style="max-width:500px; max-height:150px;">';
+  system_image_span.innerHTML = '<img src="master/images/'+system_img_src+'" style="max-width:500px; max-height:150px;">';
 
   for (let i = 0; i < star_number_list.length; i++) {
     star_number_list[i].innerHTML = num_stars;
