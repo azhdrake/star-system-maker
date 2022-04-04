@@ -101,6 +101,10 @@ html, body{
   /* flex-grow: 7; */
   width:80%;
   background-color: rgb(155, 155, 155);
+  /* max-height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
 }
 
 #object-select, .sub-select{
@@ -112,6 +116,7 @@ html, body{
 
 #header {
   background-color: rgb(250, 255, 185);
+  display: block;
 }
 
 #header .title{
@@ -206,6 +211,52 @@ tr:hover {
 #div2-4 table{
   background-color: #c8c8cb;
   border: none;
+}
+
+#main-content{
+  height: 100%;
+}
+
+#system-content{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-grow: 1;
+  height: 100%;
+}
+
+#overview-content{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#overview-content div{
+  /* flex: 1 2 auto;  */
+  height: 175px;
+}
+
+#overview-blurb{
+  background-color: #fdffe5;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-content: center;
+  text-align: center;
+  flex-basis: auto;
+}
+
+#overview-table-container{
+  overflow-y: scroll;
+  display: block;
+  flex-grow: 1;
+  flex-basis: fill;
+}
+
+#overflow-table{
+  table-layout:fixed;
+  width:100%;
+  height: min-content;
 }
 
 .help-btn{

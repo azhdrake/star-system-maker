@@ -218,7 +218,8 @@
       <div id="header">
         <div class="title"><span class="system-name"></span> - <span class="group-name"></span> - <span class="star-name"></span> - <span class="planet-name"></span> - <span class="moon-name"></span></div>
         <div id="object-select">
-          <button class="object-button selected-button top-btn" id="stars">Stars</button>
+          <button class="object-button selected-button top-btn" id="system">System</button>
+          <button class="object-button top-btn" id="stars">Stars</button>
           <button class="object-button top-btn" id="planets">Panets</button>
           <button class="object-button top-btn" id="moons">Moons</button>
         </div>
@@ -226,14 +227,35 @@
 
       <!-- Main Content -->
       <div id="main-content"> 
-        <div id="stars-content" class="tab">
+        <div id="system-content" class="tab">
+          <div id="system-stat-type-select" class="sub-select">
+            <button class="object-button small-button system-btn selected-button" id="system-overview">System Overview</button>
+            <button class="object-button small-button system-btn" id="system-notes">System Notes</button>
+          </div>
+          <div id="overview-content" class="system-tab"> 
+            <div id="overview-blurb">
+            <span id="blurb-intro">
+              <span class="system-name"></span> is a stellar system with <span class="number-of-stars">#</span> stars distributed in <span class="number-of-groups">#</span> star groups, similar to the diagram below.
+            </span>
+            <div id="system-image"></div>
+            </div>
+            <div id="overview-table-container">
+              <table id="overview-table">
+               
+              </table>
+            </div>
+          </div>
+          <div id="notes-content" class="system-tab hidden">
+            NOTES
+          </div>
+        </div>
+        <!-- Star Tab -->
+        <div id="stars-content" class="tab hidden">
           <div id="star-stat-type-select" class="sub-select">
             <button class="object-button small-button star-btn selected-button" id="individual">Individual Stats</button>
             <button class="object-button small-button star-btn" id="group">Group Stats</button>
             <button class="object-button small-button star-btn" id="shared">Shared Stats</button>
           </div>
-
-          <!-- Star Tab -->
           <div id="individual-content" class="star-tab">
             <table>
               <tr class="bottom-border">

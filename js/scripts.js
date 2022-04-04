@@ -21,6 +21,7 @@ const help_button = document.querySelector("#help-button");
 const save_button = document.querySelector("#save-button");
 const load_button = document.querySelector("#load-button");
 
+const system_button = document.querySelector("#system");
 const stars_button = document.querySelector("#stars");
 const planets_button = document.querySelector("#planets");
 const moons_button = document.querySelector("#moons");
@@ -32,6 +33,9 @@ const time_button = document.querySelector("#time");
 const individual_button = document.querySelector("#individual");
 const group_button = document.querySelector("#group");
 const shared_button = document.querySelector("#shared");
+
+const system_overview_button = document.querySelector("#system-overview");
+const system_notes_button = document.querySelector("#system-notes");
 
 const star_selector = document.querySelectorAll(".star-selector");
 const planet_selector = document.querySelectorAll(".planet-selector");
@@ -81,13 +85,25 @@ const choose_planets_system_field = document.querySelector("#choose-planets-syst
 const choose_planets_group_field = document.querySelector("#choose-planets-group-field")
 const new_planet_name_field = document.querySelector("#new-planet-name-field")
 
+const system_image_span = document.querySelector("#system-image")
+const star_number_list = document.querySelectorAll(".number-of-stars")
+const group_number_list = document.querySelectorAll(".number-of-groups")
+
+system_button.addEventListener("click", function(){ open_tab("system-content", "tab")} );
 stars_button.addEventListener("click", function(){ open_tab("stars-content", "tab")} );
 planets_button.addEventListener("click", function(){ open_tab("planets-content", "tab")});
 moons_button.addEventListener("click", function(){ open_tab("moons-content", "tab")});
 
+system_button.addEventListener("click", function(){ select_button(system_button, "top-btn")} );
 stars_button.addEventListener("click", function(){ select_button(stars_button, "top-btn")} );
 planets_button.addEventListener("click", function(){ select_button(planets_button, "top-btn")});
 moons_button.addEventListener("click", function(){ select_button(moons_button, "top-btn")});
+
+system_overview_button.addEventListener("click", function(){ open_tab("overview-content", "system-tab")} );
+system_notes_button.addEventListener("click", function(){ open_tab("notes-content", "system-tab")} );
+
+system_overview_button.addEventListener("click", function(){ select_button(system_overview_button, "system-btn")} );
+system_notes_button.addEventListener("click", function(){ select_button(system_notes_button, "system-btn")} );
 
 physical_button.addEventListener("click", function(){ open_tab("physical-content", "planet-tab")} );
 orbit_button.addEventListener("click", function(){ open_tab("orbit-content", "planet-tab")} );
@@ -129,7 +145,6 @@ choose_planets_system_field.addEventListener("change", function(){ populate_grou
 page_dimmer.addEventListener("click", function(){
   hideOnClickOutside(page_dimmer)
 })
-
 
 function create_new_system(){
   let new_json = {};
@@ -632,6 +647,8 @@ const planet_min_earth_field = document.querySelector("#planet-min-earth");
 const planet_sec_local_field = document.querySelector("#planet-sec-local");
 const planet_sec_earth_field = document.querySelector("#planet-sec-earth");
 
+const overview_table =  document.querySelector("#overview-table");
+
 star_mass_field.addEventListener('input', function(){ save_time()} );
 
 star_a_eccentrisity_field.addEventListener('input', function(){ save_time()} );
@@ -764,6 +781,87 @@ function calc_time(){
   planet_min_earth = planet_min_earth_field.innerHTML = (planet_hour_earth / planet_min_local) * 60;
   planet_sec_local = planet_sec_local_field.value;
   planet_sec_earth_field.innerHTML = (planet_min_earth / planet_sec_local) * 60;
+
+  let num_star_groups = num_stars = 0;
+  num_star_groups = system_list[system_id]["Star Groups"].length;
+  if(num_star_groups == 2){
+    num_stars = system_list[system_id]["Star Groups"][0]["Stars"].length + system_list[system_id]["Star Groups"][1]["Stars"].length;
+    if(system_list[system_id]["Star Groups"][0]["Stars"].length == 1 && system_list[system_id]["Star Groups"][1]["Stars"].length == 1){
+      system_img_src = "2D.png"
+    } else if(system_list[system_id]["Star Groups"][0]["Stars"].length == 2 && system_list[system_id]["Star Groups"][1]["Stars"].length == 1 || 
+    system_list[system_id]["Star Groups"][0]["Stars"].length == 1 && system_list[system_id]["Star Groups"][1]["Stars"].length == 2 
+    ){
+      system_img_src = "2C1D.png"
+    } else if(system_list[system_id]["Star Groups"][0]["Stars"].length == 2 && system_list[system_id]["Star Groups"][1]["Stars"].length == 2){
+      system_img_src = "2C2C.png"
+    }
+  } else {
+    if(system_list[system_id]["Star Groups"][0]["Stars"].length == 1){
+      system_img_src = "1S.png"
+    } else if(system_list[system_id]["Star Groups"][0]["Stars"].length == 2){
+      system_img_src = "2S.png"
+    }
+    num_stars = system_list[system_id]["Star Groups"][0]["Stars"].length;
+  }
+  
+  system_image_span.innerHTML = '<img src="images/'+system_img_src+'" style="max-width:500px; max-height:150px;">';
+
+  for (let i = 0; i < star_number_list.length; i++) {
+    star_number_list[i].innerHTML = num_stars;
+  } 
+  for (let i = 0; i < group_number_list.length; i++) {
+    group_number_list[i].innerHTML = num_star_groups;
+  } 
+
+  overview_table.innerHTML = "";
+  let row_1 = document.createElement("tr") 
+  let header_1 = document.createElement("th");
+  header_1.innerHTML = 'System Overview';
+  row_1.appendChild(header_1);
+  overview_table.appendChild(row_1);
+  
+  let row_2 = document.createElement("tr");
+  let header_2_1 = document.createElement("th"); header_2_1.innerHTML = "Name";
+  let header_2_2 = document.createElement("th"); header_2_2.innerHTML = "Type";
+  let header_2_3 = document.createElement("th"); header_2_3.innerHTML = "Associated Body";
+  row_2.appendChild(header_2_1);
+  row_2.appendChild(header_2_2);
+  row_2.appendChild(header_2_3);
+  overview_table.appendChild(row_2);
+
+  for(let i=0; i < system_list[system_id]["Star Groups"].length; i++){
+    for(let j=0; j < system_list[system_id]["Star Groups"][i]["Stars"].length; j++){
+      star_name = system_list[system_id]["Star Groups"][i]["Stars"][j]["Name"];
+      star_group = system_list[system_id]["Star Groups"][i]["Name"];
+
+      add_row(star_name, "Star", star_group, overview_table)
+    }
+    for(let j=0; j < system_list[system_id]["Star Groups"][i]["Planets"].length; j++){
+      planet_name = system_list[system_id]["Star Groups"][i]["Planets"][j]["Name"];
+      star_group = system_list[system_id]["Star Groups"][i]["Name"];
+
+      add_row(planet_name, "Planet", star_group, overview_table)
+
+      for(let k=0; k < system_list[system_id]["Star Groups"][i]["Planets"][j]["Moons"].length; k++){
+        moon_name = system_list[system_id]["Star Groups"][i]["Planets"][j]["Moons"][k]["Name"];
+        add_row(moon_name, "Moon", planet_name, overview_table)
+      }
+    }
+  }
+
+}
+
+function add_row(d1, d2, d3, table){
+  let row = document.createElement("tr");
+  let td1 = document.createElement("td"); td1.innerHTML = d1;
+  let td2 = document.createElement("td"); td2.innerHTML = d2;
+  let td3 = document.createElement("td"); td3.innerHTML = d3;
+  row.appendChild(td1);
+  row.appendChild(td2);
+  row.appendChild(td3);
+  overview_table.appendChild(row);
+
+  table.appendChild(row);
 }
 
 /***************\
